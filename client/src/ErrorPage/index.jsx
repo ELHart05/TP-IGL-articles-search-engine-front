@@ -1,12 +1,12 @@
 import Layout from '../../components/Layout';
 import './style.css';
 
-const HomePage = () => {
+const ErrorPage = () => {
     return (
         <Layout>
-            <div className='p-56'>this is my HomePage</div>
+            <div className='p-56'>this is my ErrorPage</div>
         </Layout>
     )
 }
 
-export default HomePage
+export default ErrorPage
