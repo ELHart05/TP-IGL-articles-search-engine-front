@@ -1,4 +1,4 @@
 export const SERVER_URL = {
-    development: "my-dev-api",
+    development: "http://localhost:8000/",
     production: "my-prod-api",
 }
