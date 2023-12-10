@@ -1,10 +1,6 @@
-import { Route } from "react-router-dom"
-
-const PrivateRoute = ({ ...props }) => {
+const PrivateRoute = ({ children }) => {
     //TODO: handle route protection logic
-    return (
-        <Route {...props} />
-    )
+    return children;
 }
 
 export default PrivateRoute

@@ -8,7 +8,14 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <PrivateRoute path="/about" element={<AboutPage />} />
+      <Route
+        path="/about"
+        element={
+          <PrivateRoute>
+            <AboutPage />
+          </PrivateRoute>
+        }
+      />
       <Route path="*" element={<ErrorPage />} />
     </Routes>
   )
