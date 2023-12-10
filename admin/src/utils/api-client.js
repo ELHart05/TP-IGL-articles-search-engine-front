@@ -15,3 +15,5 @@ API.interceptors.request.use((async (config) => {
     }
     return config; 
 }))
+
+export default API;

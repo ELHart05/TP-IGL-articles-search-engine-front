@@ -1,4 +1,4 @@
 export const SERVER_URL = {
-    development: "http://localhost:8000/",
+    development: "https://my-json-server.typicode.com/typicode/demo",
     production: "my-prod-api",
 }
