@@ -1,34 +1,23 @@
-import { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
-import API from "../../utils/api-client"
+import Hero from '../../components/Home/Hero';
+import ArticlesList from '../../components/Home/ArticlesList';
+import WhyUs from '../../components/Home/WhyUs';
+import Informations from '../../components/Home/Informations';
 import './style.css';
 
-const HomePage = () => {
-    const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        API.get('/posts')
-            .then((response) => {
-                setLoading(false);
-                setPosts(response.data);
-            })
-            .catch((error) => {
-                console.error('Error fetching data:', error);
-                setLoading(false);
-            });
-    }, []);
-
+const Home = () => {
     return (
-        <Layout isLoading={loading}>
-            <h1>This is my HomePage</h1>
-            <ul>
-                {posts.map((post) => (
-                    <li key={post.id}>{post.title}</li>
-                ))}
-            </ul>
+        <Layout isLoading={false}>
+            <div className='pb-10'>
+                <Hero />
+                <div className='flex flex-col gap-16 mt-20 px-9'>
+                    <WhyUs />
+                    <ArticlesList />
+                    <Informations />
+                </div>
+            </div>
         </Layout>
     )
 }
 
-export default HomePage
+export default Home

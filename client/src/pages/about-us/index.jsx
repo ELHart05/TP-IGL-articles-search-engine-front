@@ -1,7 +1,7 @@
 import Layout from '../../components/Layout';
 import './style.css';
 
-const AboutPage = () => {
+const AboutUs = () => {
     return (
         <Layout>
             <div className='p-56'>this is my AboutPage</div>
@@ -9,4 +9,4 @@ const AboutPage = () => {
     )
 }
 
-export default AboutPage
+export default AboutUs
