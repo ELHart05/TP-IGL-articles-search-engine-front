@@ -1,22 +1,22 @@
 import { Route, Routes } from "react-router-dom"
 import PrivateRoute from "./middleware/PrivateRoute"
-import HomePage from "./pages/Home"
-import AboutPage from "./pages/About"
-import ErrorPage from "./pages/Error"
+import Home from "./pages/home"
+import About from "./pages/about"
+import Error from "./pages/error"
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      <Route path="/" element={<Home />} />
       <Route
         path="/about"
         element={
           <PrivateRoute>
-            <AboutPage />
+            <About />
           </PrivateRoute>
         }
       />
-      <Route path="*" element={<ErrorPage />} />
+      <Route path="*" element={<Error />} />
     </Routes>
   )
 }

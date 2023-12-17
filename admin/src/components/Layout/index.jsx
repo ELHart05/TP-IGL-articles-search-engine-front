@@ -1,14 +1,19 @@
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import Loading from '../../components/Loading'
+import { useState } from 'react';
 import './style.css';
 
 const Layout = ({ isLoading, children }) => {
+    const [accessToken, setAccessToken] = useState(false);
     return (
-        <>
+        <div className='flex flex-col min-h-screen'>
             <Navbar />
-            <div>{isLoading ? "Loading..." : children}</div>
+            <main className='bg-[#f9f9f9] flex items-stretch flex-1'>
+                {isLoading ? <Loading /> : children}
+            </main>
             <Footer />
-        </>
+        </div>
     )
 }
 

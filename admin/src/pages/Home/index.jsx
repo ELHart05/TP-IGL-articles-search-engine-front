@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 import API from "../../utils/api-client"
 import './style.css';
 
-const HomePage = () => {
+const Home = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -21,7 +21,7 @@ const HomePage = () => {
 
     return (
         <Layout isLoading={loading}>
-            <h1>This is my HomePage</h1>
+            <h1>This is my Home</h1>
             <ul>
                 {posts.map((post) => (
                     <li key={post.id}>{post.title}</li>
@@ -31,4 +31,4 @@ const HomePage = () => {
     )
 }
 
-export default HomePage
+export default Home

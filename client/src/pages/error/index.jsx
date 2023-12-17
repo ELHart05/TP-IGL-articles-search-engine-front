@@ -1,12 +1,12 @@
 import Layout from '../../components/Layout';
 import './style.css';
 
-const AboutPage = () => {
+const Error = () => {
     return (
         <Layout>
-            <div className='p-56'>this is my AboutPage</div>
+            This is a error page
         </Layout>
     )
 }
 
-export default AboutPage
+export default Error
