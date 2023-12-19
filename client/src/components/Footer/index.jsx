@@ -16,11 +16,11 @@ const guesstNavItems = [
     },
     {
         name: 'Sign in',
-        link: '/sign-in'
+        link: '/auth/sign-in'
     },
     {
         name: 'Sign up',
-        link: '/sign-up'
+        link: '/auth/sign-up'
     }
 ]
 
