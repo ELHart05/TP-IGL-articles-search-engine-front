@@ -1,5 +1,5 @@
 import { useState } from "react";
-import article from "./assets/article.svg"
+import article from "../../../../public/images/assets/article.svg"
 const Signup = () => {
     const [active , setActive] = useState(false)
     return(
