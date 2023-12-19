@@ -1,11 +1,16 @@
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import Loading from '../../components/Loading'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './style.css';
 
 const Layout = ({ isLoading, children }) => {
-    const [accessToken, setAccessToken] = useState(false);
+    const [accessToken, setAccessToken] = useState(true);
+
+    useEffect(() => {
+        //add getting token logic
+    }, [])
+
     return (
         <div className='flex flex-col min-h-screen'>
             <Navbar accessToken={accessToken} />

@@ -75,7 +75,7 @@ const footerSubList = [
 
 const Footer = ({ accessToken }) => {
     return (
-        <footer className='bg-second px-9 py-16 2sm:py-24 text-white flex flex-col gap-8 text-md md:text-lg'>
+        <footer className='z-0 bg-second px-9 py-16 2sm:py-24 text-white flex flex-col gap-8 text-md md:text-lg'>
             <div className='flex flex-col gap-4 sm:gap-0 sm:flex-row items-center justify-between'>
                 <div className='text-xl font-bold relative z-50'>
                     <Link to="/" className='logo'>
