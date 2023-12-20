@@ -1,11 +1,11 @@
+import { useEffect, useState } from 'react';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import Loading from '../../components/Loading'
-import { useEffect, useState } from 'react';
 import './style.css';
 
 const Layout = ({ isLoading, children }) => {
-    const [accessToken, setAccessToken] = useState(true);
+    const [accessToken, setAccessToken] = useState(false);
 
     useEffect(() => {
         //add getting token logic
