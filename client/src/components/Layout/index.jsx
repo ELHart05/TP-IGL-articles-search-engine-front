@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import './style.css';
 
 const Layout = ({ isLoading, children }) => {
-    const [accessToken, setAccessToken] = useState(false);
+    const [accessToken, setAccessToken] = useState(true);
 
     useEffect(() => {
         //add getting token logic
