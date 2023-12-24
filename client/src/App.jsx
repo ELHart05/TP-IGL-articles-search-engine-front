@@ -7,6 +7,7 @@ import Search from "./pages/search"
 import Login from "./pages/auth/sign-in/pageLogin"
 import Signup from "./pages/auth/sign-up/pageSignup"
 import ProfileInfo from "./pages/profile/profileInfo"
+import ArticleDetails from "./pages/articleDetails/articleDetails.jsx"
 import { useState } from "react"
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
         <Route path="/auth/sign-up" element={<Signup />} />
         <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<ProfileInfo informations={informations}/>} />
+        <Route path="/articleDetails" element={<ArticleDetails/>} />
+
         <Route
           path="/about"
           element={
