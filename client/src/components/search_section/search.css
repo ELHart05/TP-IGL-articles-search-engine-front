@@ -21,18 +21,14 @@
     border: 1px solid;
     border-color:  #EC8607;
 }
-.grid1{
-    display: grid;
-    padding :4%;
-    grid-template-columns: auto auto auto auto ;
-    gap:8%;
-}
-input {
+
+#myInput {
     border-radius: 8px;
     padding: 5%;
     width: 100%;
     height: 90%;
 }
+
 #btn {
     background: #EC8607;
     color: white;
@@ -41,6 +37,7 @@ input {
     border-radius: 12px;
     cursor: pointer;
 }
+
 .grid2{
     padding :0% 20% 10% 20% ;
     display: grid;
@@ -55,8 +52,8 @@ input {
     height:30px;
     border-radius: 15px;
     cursor: pointer;
- 
 }
+
 .styled-checkbox {
     appearance: none;
     width: 10px;
@@ -65,14 +62,12 @@ input {
     border: 2px solid #252A3A;
     outline: none;
     cursor: pointer;
-  }
-  
-  .styled-checkbox:checked {
+}
+
+.styled-checkbox:checked {
     background-color: #252A3A;
     border-color:#252A3A;
-  }
-
-
+}
 
 @media only screen and (max-width:600px) {
     .background{

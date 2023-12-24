@@ -6,6 +6,7 @@ import Error from "./pages/error"
 import Search from "./pages/search"
 import Login from "./pages/auth/sign-in/pageLogin"
 import Signup from "./pages/auth/sign-up/pageSignup"
+import ProfileInfo from "./pages/profile/profileInfo"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/auth/sign-in" element={<Login />} />
         <Route path="/auth/sign-up" element={<Signup />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/profile" element={<ProfileInfo informations={{name: "okba", familyName: "zbi", email: "zz.zz.z"}} />} />
         <Route
           path="/about"
           element={
