@@ -7,8 +7,12 @@ import Search from "./pages/search"
 import Login from "./pages/auth/sign-in/pageLogin"
 import Signup from "./pages/auth/sign-up/pageSignup"
 import ProfileInfo from "./pages/profile/profileInfo"
+import { useState } from "react"
 
 function App() {
+  const [informations, setInfo] = useState([
+    { name: 'walid', familyName: 'boubenia', email: 'boubenia.walid@gmail.com'}
+  ])
   return (
     <div className="font-main">
       <Routes>
@@ -16,7 +20,7 @@ function App() {
         <Route path="/auth/sign-in" element={<Login />} />
         <Route path="/auth/sign-up" element={<Signup />} />
         <Route path="/search" element={<Search />} />
-        <Route path="/profile" element={<ProfileInfo informations={{name: "okba", familyName: "zbi", email: "zz.zz.z"}} />} />
+        <Route path="/profile" element={<ProfileInfo informations={informations}/>} />
         <Route
           path="/about"
           element={

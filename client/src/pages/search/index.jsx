@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import API from "../../utils/api-client";
 import Layout from "../../components/Layout";
 import Article from '../../components/search_section/Article/index';
-import { articles } from "../../components/Home/ArticlesList";
 import SearchBar from "../../components/search_section/Search_bar";
+import { articles } from "../../components/Home/ArticlesList";
 
 const Search = () => {
     const [posts, setPosts] = useState([]);
