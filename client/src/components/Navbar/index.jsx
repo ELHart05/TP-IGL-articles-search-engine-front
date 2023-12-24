@@ -1,6 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import User from '/images/Navbar/user.svg';
 import Favorite from '/images/Navbar/favorite.svg';
 import Menu from '/images/Navbar/menu.svg';
 import SignOut from '/images/Navbar/signout.svg';

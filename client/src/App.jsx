@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { Route, Routes } from "react-router-dom"
 import PrivateRoute from "./middleware/PrivateRoute"
 import Home from "./pages/home"
@@ -7,8 +8,8 @@ import Search from "./pages/search"
 import Login from "./pages/auth/sign-in/pageLogin"
 import Signup from "./pages/auth/sign-up/pageSignup"
 import ProfileInfo from "./pages/profile/profileInfo"
-import ArticleDetails from "./pages/articleDetails/articleDetails.jsx"
-import { useState } from "react"
+import ArticleDetails from "./pages/article-details"
+import Favorite from "./pages/favorite/index.jsx"
 
 function App() {
   const [informations, setInfo] = useState([
@@ -22,8 +23,8 @@ function App() {
         <Route path="/auth/sign-up" element={<Signup />} />
         <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<ProfileInfo informations={informations}/>} />
-        <Route path="/articleDetails" element={<ArticleDetails/>} />
-
+        <Route path="/article-details" element={<ArticleDetails/>} />
+        <Route path="/favorite" element={<Favorite/>} />
         <Route
           path="/about"
           element={
