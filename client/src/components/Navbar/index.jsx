@@ -6,6 +6,7 @@ import Menu from '/images/Navbar/menu.svg';
 import SignOut from '/images/Navbar/signout.svg';
 import Profile from '/images/Navbar/profile.svg';
 import './style.css';
+import axios from 'axios';
 
 const guesstNavItems = [
     {
@@ -85,9 +86,31 @@ const Navbar = ({ accessToken }) => {
         }
     }, [pathname])
 
-    const signOut = () => {
-        console.log("signout")
-        //handle logout logic
+    const signOut = async () => {
+        try {
+            await axios.post(
+                'http://localhost:8000/auth/logout/',
+                {
+                    refresh_token: localStorage.getItem('refresh_token'),
+                },
+                {
+                    headers: {
+                      'Content-Type': 'application/json',
+                  },
+                    withCredentials: true,
+                }
+            );
+            // Clear local storage
+            localStorage.clear();
+            // Clear Authorization header
+            axios.defaults.headers.common['Authorization'] = null;
+
+            // Redirect to the login page
+            window.location.href = '/auth/sign-in';
+
+        } catch (error) {
+            console.error('Logout not working', error);
+        }
     }
 
     return (
