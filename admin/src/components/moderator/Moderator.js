@@ -6,59 +6,59 @@ import pen from "./pen.png";
 import trash from "./trash.png";
 const Moderator = () => {
     return(  
-<div className='moderator'>       
-        <div className='top'> 
+<div className='moderattor'>       
+        <div className='topp'> 
             <h2> PaperHub</h2> 
-             <button id="btn" > log out  </button> 
+             <button id="btnnn" > log out  </button> 
              <div className='line'></div>
 
         </div>
-        <div className='middle'> 
+        <div className='middlle'> 
             <h2> Articles</h2> 
              <button id="search" > search  </button>     
         </div>
-        <div className='title'>
+        <div className='titlle'>
         <button id="btn1" >   Articles </button>
-        <img src={search} /> 
+        <img id="immg2" src={search} /> 
         <button id="info"> Informations   </button>
-        <img src={check} />
+        <img id="immg2" src={check} />
         </div>
-        <div className='container'>
+        <div className='containner'>
             <div className='ligne'>
-                <h4>Machine learning </h4>
-                <h4>By Benkhelifa </h4>
-                <img id="image" src={pen} />  
-                <img id="image" src={trash} /> 
+                <h4 id="titre">Machine learning </h4>
+                <h4 id="titre">By Benkhelifa </h4>
+                <img id="immg" src={pen} />  
+                <img id="immg" src={trash} /> 
             </div>
             <div className='ligne'>
-                <h4>Machine learning </h4>
-                <h4>By Benkhelifa </h4>
-                <img id="image" src={pen} />  
-                <img id="image" src={trash} /> 
+                <h4 id="titre">Machine learning </h4>
+                <h4 id="titre">By Benkhelifa </h4>
+                <img id="immg" src={pen} />  
+                <img id="immg" src={trash} /> 
             </div>
             <div className='ligne'>
-                <h4>Machine learning </h4>
-                <h4>By Benkhelifa </h4>
-                <img id="image" src={pen} />  
-                <img id="image" src={trash} /> 
+                <h4 id="titre">Machine learning </h4>
+                <h4 id="titre">By Benkhelifa </h4>
+                <img id="immg" src={pen} />  
+                <img id="immg" src={trash} /> 
             </div>
             <div className='ligne'>
-                <h4>Machine learning </h4>
-                <h4>By Benkhelifa </h4>
-                <img id="image" src={pen} />  
-                <img id="image" src={trash} /> 
+                <h4 id="titre">Machine learning </h4>
+                <h4 id="titre">By Benkhelifa </h4>
+                <img id="immg" src={pen} />  
+                <img id="immg" src={trash} /> 
             </div>
             <div className='ligne'>
-                <h4>Machine learning </h4>
-                <h4>By Benkhelifa </h4>
-                <img id="image" src={pen} />  
-                <img id="image" src={trash} /> 
+                <h4 id="titre">Machine learning </h4>
+                <h4 id="titre">By Benkhelifa </h4>
+                <img id="immg" src={pen} />  
+                <img id="immg" src={trash} /> 
             </div>
             <div className='ligne'>
-                <h4>Machine learning </h4>
-                <h4>By Benkhelifa </h4>
-                <img id="image" src={pen} />  
-                <img id="image" src={trash} /> 
+                <h4 id="titre">Machine learning </h4>
+                <h4 id="titre">By Benkhelifa </h4>
+                <img id="immg" src={pen} />  
+                <img id="immg" src={trash} /> 
             </div>
 
         </div>

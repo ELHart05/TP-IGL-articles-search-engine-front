@@ -1,13 +1,16 @@
-.moderator{
+.moderattor{
     background-color: #F9F9F9;
 }
-.top{
+#immg2{
+    margin-top: 25px;
+    }
+.topp{
     margin-left: 4%;
     display: grid;
     grid-template-columns: auto auto;
     column-gap:75% ;
 }
-.middle{
+.middlle{
     margin-left: 5%;
     display: grid;
     grid-template-columns: auto auto;
@@ -22,7 +25,7 @@
     border-radius: 10px;
     margin: 10px;
 }
-#btn {
+#btnnn {
     position: relative;
     top: 15%;
     width:70px;
@@ -48,7 +51,7 @@
     width:200%;
     height: 2px;
 }
-.title{
+.titlle{
     background-color: white;
     width: 70%;
     border-radius: 10px;
@@ -59,10 +62,10 @@
     padding-left:8%;
     margin-bottom: 2%;
 }
-img{
+#immg{
     width: 28px;
     height: 25px;
-    margin: 15px;
+    
 }
 #info {
     margin: 15px;
@@ -70,7 +73,7 @@ img{
     width: 35%;
     box-shadow: #004D40;
 }
-.container{
+.containner{
     display: grid;
     grid-template-columns: auto;
     background-color: white;
@@ -81,30 +84,32 @@ img{
 
 }
 .ligne{
+    padding-top: 12px;
     border-radius: 10px;
     padding-left: 9%;
     margin-left: 11%;
     margin-bottom: 2%;
     width: 72%;
+    height: 50px;
     display: grid;
     grid-template-columns: auto auto auto auto;
     outline: 2px solid black;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 @media only screen and (max-width: 800px) {
-.title{
+.titlle{
     width: 80%;
         height: 60px;
         column-gap: 2%;
         padding-left:1%;
     }
-.top{
+.topp{
         margin-left: 5%;
         display: grid;
         grid-template-columns: auto auto;
         column-gap:35% ;
     }  
-.middle{
+.middlle{
         margin-left: 5%;
         display: grid;
         grid-template-columns: auto auto;
@@ -116,17 +121,19 @@ img{
     height: 23px;
     
 }
-img{
+#immg{
     width: 22px;
     margin:20px;
+    margin-bottom: 35px;
 }
+
 #search{
         width: 200px;
         height: 30px;
         margin: 20px;
 
     }
-#btn{
+#btnn{
     margin: 15px;
     height: 30px;
 }
@@ -134,7 +141,7 @@ img{
     margin: 10px;
     height: 30px;
 }
-.container{
+.containner{
     padding-top: 4%;
 }
 .ligne{
@@ -148,20 +155,39 @@ img{
     column-gap: 2%;
 
 }
-#image{
+
+#immg2{
+    width: 20px;
+    margin-top: 25px;
+    }
+#imagee{
     width: 20px;
     height: 20px;
 }
 }
 @media screen and (min-width: 801px) and (max-width: 1300px) {
-.top{
+.topp{
     margin-left: 7%;
 }
-.middle{
+.middlle{
     margin-left: 7%;
 }
 #search{
     margin-right: 5%;
     width: 260px;
 }
+#info{
+    margin: 22px;
+    width:70%;
+    height: 23px;
+    
+}
+#immg{
+margin-bottom: 35px;
+}
+#immg2{
+    width: 20px;
+    margin-top: 25px;
+    }
+
   }
