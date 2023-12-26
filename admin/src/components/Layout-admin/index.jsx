@@ -1,4 +1,4 @@
-import Navbar from '../navbar-moderator/Navbar';
+import Navbar from '../navbar_admin/Navbar';
 import Loading from '../../components/Loading'
 import { useState, useEffect } from 'react';
 import './style.css';
