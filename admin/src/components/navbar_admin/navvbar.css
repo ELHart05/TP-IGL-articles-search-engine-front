@@ -1,15 +1,15 @@
 .allll{
 
     padding-bottom: 10px;
-}.topp{
+}
+
+.topp{
     margin-left: 4%;
     display: grid;
     grid-template-columns: auto auto;
     column-gap:75% ;
 }
-#hi{
-    margin-left: 4%;
-}
+
 #inputt{
     padding-left: 8px;
     border-radius: 8px;
@@ -20,10 +20,10 @@
     transition: box-shadow 0.3s ease-in-out; 
 
 }
-#btn1 {
+#btn111 {
     position: relative;
     top: 15%;
-    width:150px;
+    width:170px;
     height:45px;
     color: white;
     background-color:#004D40;
@@ -46,20 +46,20 @@
     grid-template-columns: auto auto;
     column-gap:60% ;
 }
-.titlle{
+.titllee{
     background-color: white;
-    width: 74%;
+    width: 78%;
     border-radius: 10px;
     margin-left:12% ;
     margin-top:3% ;
     display: grid;
     grid-template-columns: auto auto auto;
     column-gap: 15px;
-    padding-top:10px;
+    padding-top:5px;
     padding-left:60px;
     padding-bottom:15px;
     margin-bottom: 2%;
-    height: 50px;
+    height: 70px;
 }
 
 #btnnn {
@@ -80,9 +80,13 @@
     width:200%;
     height: 2px;
 }
-
+#boldd{
+    font-weight: bold;
+    font-size:20px;
+    margin-left: 5%;
+}
 @media only screen and (max-width: 800px) {
-.titlle{
+.titllee{
         width: 80%;
         height: 70px;
         column-gap: 2%;
@@ -119,9 +123,9 @@
         margin: 15px;
         height: 30px;
     }
-#btn1{
+#btn111{
         height:52px;
-        width: 80px;
+        width: 90px;
     
     }
 #btn2{
@@ -132,7 +136,7 @@
     }
 #inputt{
     height:30px;
-    width: 90%;
+    width: 90px;
     margin-top: 10px;
    
 }

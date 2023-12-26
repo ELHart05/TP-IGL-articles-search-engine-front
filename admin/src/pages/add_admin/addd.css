@@ -27,7 +27,7 @@
     }
     .titllle{
         background-color: white;
-        width: 70%;
+        width:78%;
         border-radius: 10px;
         margin-left:12% ;
         display: grid;
@@ -57,6 +57,8 @@
 
 #green{
     color: #004D40;
+    margin: 10px;
+    font-size: larger;
 }
 #btn1 {
     position: relative;
@@ -72,6 +74,7 @@
 
 
 #Inputt{
+   
     padding-left: 10px;
     padding: 3px;
     border-radius: 8px;
@@ -110,18 +113,13 @@
 
 
 @media only screen and (max-width: 800px) {
-    .titllle{
-        width: 80%;
+.titllle{
+            width: 80%;
             height: 60px;
             column-gap: 2%;
             padding-left:1%;
         }
-        .titllle1{
-            width: 80%;
-                height: 60px;
-                column-gap: 2%;
-             
-            }
+
         #info{
             margin: 22px;
             width: 65%;
@@ -135,18 +133,20 @@
     .containner{
         padding-top: 4%;
     }
- 
-  
- 
-    #white{
+
+#white{
         background-color: white;
-        height: 40px;
+        height: 60px;
+        margin-left: 8px;
         border-radius: 10px;
+        width: 60px;
         
     }
-    #greenn{
+#greenn{
         background-color:#004D40;
-        height: 40px;
+        height: 60px;
+        margin-left: 5px;
+        width: 100px;
         border-radius: 10px;
         color: white;
     }

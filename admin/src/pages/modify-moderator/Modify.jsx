@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import "./addd.css";
-import check from "./Check All.png";
-import search from "./Search.png";
-import Layout from "../../components/Layout-admin/index"
-const Addadmin = () => {
+import check from "../../../public/images/Check All.png";
+import search from "../../../public/images/search.png";
+import Navbar from "../../components/navbar_admin/Navbar";
+const Modify = () => {
     return(  
         <div className='moood'>
-          <Layout/>
+          < Navbar/>
         <div className='titllle'>
         <button id="btn11" >   Articles </button>
         <img id="immg2" src={search} /> 
@@ -16,8 +15,8 @@ const Addadmin = () => {
         <div className='containner'>
         <div className='titllle1'>
         <button id="white" >   Gérer moderateurs </button> 
-        <button id="white"> Ajouter un moderateur  </button>
-        <button id="greenn"> Mes Informations  </button>
+        <button id="greenn"> Ajouter un moderateur  </button>
+        <button id="white"> Mes Informations  </button>
        
         </div>
         <h2 id="green">Les Informations de l'admin:</h2>
@@ -36,4 +35,4 @@ const Addadmin = () => {
         </div>
     );
 }
-export default Addadmin
+export default Modify

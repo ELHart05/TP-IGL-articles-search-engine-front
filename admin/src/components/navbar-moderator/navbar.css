@@ -4,11 +4,16 @@
     grid-template-columns: auto auto;
     column-gap:75% ;
 }
+#bold{
+    font-weight: bold;
+    font-size:20px;
+}
 .middlle{
-    margin-left: 4%;
+    margin-left: 2%;
     display: grid;
     grid-template-columns: auto auto;
     column-gap:60% ;
+    
 }
 
 #searchh{

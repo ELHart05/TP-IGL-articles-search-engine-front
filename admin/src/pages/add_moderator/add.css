@@ -26,16 +26,7 @@
     border-radius: 10px;
     margin: 10px;
 }
-#btnnn {
-    position: relative;
-    top: 15%;
-    width:70px;
-    height: 40px;
-    background-color: #004D40;
-    color: white;
-    border-radius: 10px;
-   
-}
+
 
 .line{
    
@@ -43,13 +34,13 @@
     width:200%;
     height: 2px;
 }
-.titlle{
+.titlleee{
     background-color: white;
-    width: 70%;
+    width:78%;
     border-radius: 10px;
     margin-left:12% ;
     display: grid;
-    grid-template-columns: auto  auto auto auto;
+    grid-template-columns:auto auto auto auto;
     column-gap: 10px;
     padding-left:8%;
     margin-bottom: 2%;
@@ -83,7 +74,7 @@
 
 #btnnn {
     position: relative;
-    top: 15%;
+  
     width:70px;
     height: 40px;
     background-color: #004D40;
@@ -124,11 +115,6 @@
 
 }
 
-
-
-
-
-
 @media only screen and (max-width: 800px) {
     .titlle{
         width: 80%;
@@ -150,7 +136,7 @@
         }
     #infoo{
         margin: 22px;
-        width:60%;
+        width:75%;
         height: 30px;
       
         

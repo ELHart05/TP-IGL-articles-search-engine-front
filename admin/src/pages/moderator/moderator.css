@@ -51,9 +51,9 @@
     width:200%;
     height: 2px;
 }
-.titlle{
+.titlllee{
     background-color: white;
-    width: 70%;
+    width: 78%;
     border-radius: 10px;
     margin-left:12% ;
     display: grid;
@@ -97,7 +97,7 @@
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.5);
 }
 @media only screen and (max-width: 800px) {
-.titlle{
+.titlllee{
     width: 80%;
         height: 60px;
         column-gap: 2%;
