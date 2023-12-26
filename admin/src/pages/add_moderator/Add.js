@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import "./add.css";
 import check from "./Check All.png";
 import search from "./Search.png";
-import Navbar from "../navbar-moderator/Navbar";
+import Layout from "../../layout-moderator/index";
 const Add = () => {
     return(  
         <div className='mood'>
-           <Navbar/>
+           <Layout/>
            <div className='titlle'>
         <button id="btnn1" >   Articles </button>
         <img id="immg2" src={search} /> 
