@@ -1,0 +1,80 @@
+.mood{
+    background-color: #F9F9F9;
+    padding-bottom: 50px;
+}
+.containner{
+    display: grid;
+    grid-template-columns: auto;
+    background-color: white;
+    width: 70%;
+    padding-left: 8%;
+    padding-top: 2%;
+    padding-bottom: 3%;
+    margin-left: 12%;
+    border-radius: 10px;
+
+}
+
+#btnnn {
+    position: relative;
+    top: 15%;
+    width:70px;
+    height: 40px;
+    background-color: #004D40;
+    color: white;
+    border-radius: 10px;
+   
+}
+#green{
+    color: #004D40;
+}
+#btn1 {
+    position: relative;
+    top: 15%;
+    width:70px;
+    height: 40px;
+    background-color: #004D40;
+    color: white;
+    border-radius: 10px;
+   
+}
+#Inputt{
+    padding: 3px;
+    border-radius: 8px;
+    width: 60%;
+    height:100% ;
+    box-shadow: 0 0 2px #004D40; /* Green shadow */
+    transition: box-shadow 0.3s ease-in-out; 
+
+}
+#but{
+    color: white;
+    margin-top: 40px;
+    border-radius: 8px;
+    width: 61%;
+    height: 40px;
+    box-shadow: 0 0 2px #004D40;
+    background-color: #004D40;
+
+}
+
+
+
+
+
+
+@media only screen and (max-width: 800px) {
+
+    .containner{
+        padding-top: 4%;
+    }
+    
+    #btnn{
+        margin: 15px;
+        height: 30px;
+    }
+    #btn1{
+        margin: 10px;
+        height: 30px;
+    }}
+

@@ -1,5 +1,4 @@
-import Navbar from '../Navbar';
-import Footer from '../Footer';
+import Navbar from '../navbar-moderator/Navbar';
 import Loading from '../../components/Loading'
 import { useState, useEffect } from 'react';
 import './style.css';
@@ -17,7 +16,6 @@ const Layout = ({ isLoading, children }) => {
             <main className='bg-[#f9f9f9] flex items-stretch flex-1'>
                 {isLoading ? <Loading /> : children}
             </main>
-            <Footer />
         </div>
     )
 }
