@@ -4,7 +4,7 @@ import check from "./Check All.png";
 import search from "./Search.png";
 import pen from "./pen.png";
 import trash from "./trash.png";
-import Layout from "../../components/Layout-moderator"
+import Layout from "../../components/Layout-moderator/index"
 const Moderator = () => {
     return(  
 <div className='moderattor'>       
