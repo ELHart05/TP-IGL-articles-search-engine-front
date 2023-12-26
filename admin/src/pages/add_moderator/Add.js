@@ -2,13 +2,17 @@ import React, { useState, useEffect } from 'react';
 import "./add.css";
 import check from "./Check All.png";
 import search from "./Search.png";
-import Layout from '../../components/Layout-moderator/index';
-
+import Navbar from "../navbar-moderator/Navbar";
 const Add = () => {
     return(  
         <div className='mood'>
-           <Layout/>
-
+           <Navbar/>
+           <div className='titlle'>
+        <button id="btnn1" >   Articles </button>
+        <img id="immg2" src={search} /> 
+        <button id="infoo"> Informations   </button>
+        <img id="immg2" src={check} />
+        </div> 
         <div className='containner'>
         <h2 id="green">Mes Informations:</h2>
         <h3 id="green">Nom du modérateur :</h3>
