@@ -19,14 +19,11 @@ function App() {
           </PrivateRoute>
         }
       />
-      <Route path="*" element={<Error />} />
       <Route path="/moderator" element={<Moderator />} />
       <Route path="/add-moderator" element={<Add_moderator />} />
       <Route path="/add-admin" element={<Add_admin />} />
       <Route path="/modify-moderator" element={<Modify />} />
-      
-      
-
+      <Route path="*" element={<Error />} />
     </Routes>
   )
 }

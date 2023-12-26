@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from 'react';
 import "./moderator.css";
 import check from "../../../public/images/check All.png";
 import search from "../../../public/images/search.png";
