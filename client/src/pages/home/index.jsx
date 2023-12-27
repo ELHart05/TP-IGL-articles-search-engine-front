@@ -21,7 +21,7 @@ const Home = () => {
                 <div className='flex flex-col gap-16 mt-20 px-9'>
                     {!user && <WhyUs />}
                     <ArticlesList />
-                    <Informations user={user} />
+                    <Informations />
                 </div>
             </div>
         </Layout>
