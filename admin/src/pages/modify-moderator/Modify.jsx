@@ -13,8 +13,6 @@ const Modify = () => {
         <img id="immg2" src={check} />
         </div> 
         <div className='containner'>
-
-        <h2 id="green">Les Informations de l'admin:</h2>
         <h3 id="green">Nom de l'admin :</h3>
         <input id="Inputt" type="text" placeholder="Nom"/>
         <h3 id="green">Prenom de l'admin :</h3>
