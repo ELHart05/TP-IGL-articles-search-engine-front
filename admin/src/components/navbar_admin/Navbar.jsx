@@ -9,7 +9,7 @@ const Navbar = () => {
              <div className='line'></div>
             
         </div>
-        <h2 id="boldd"> Hi ,</h2> 
+        <h2 id="boldd"> Hi admin ,</h2> 
         <div className='titllee'>
         <button id="btn111" >  upload des Articles </button>
         <input type="text" placeholder="Veuillez entrer url de l’article a uploader" id="inputt" />
