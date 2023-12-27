@@ -7,6 +7,7 @@ import Add_moderator from "./pages/add_moderator/Add";
 import Add_admin from "./pages/add_admin/Addadmin";
 import Moderator from "./pages/moderator/Moderator";
 import Modify from "./pages/modify-moderator/Modify";
+
 function App() {
   return (
     <Routes>

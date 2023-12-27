@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import "./addd.css";
-import check from "../../../public/images/Check All.png";
-import search from "../../../public/images/search.png";
+import check from "/images/CheckAll.png";
+import search from "/images/Search.png";
 import Navbar from "../../components/navbar_admin/Navbar";
 const Addadmin = () => {
     return(  
@@ -20,7 +19,7 @@ const Addadmin = () => {
         <button id="greenn"> Mes Informations  </button>
        
         </div>
-        <h2 id="green">Les Informations de l'admin:</h2>
+        <h2 id="green">Mes information:</h2>
         <h3 id="green">Nom de l'admin :</h3>
         <input id="Inputt" type="text" placeholder="Nom"/>
         <h3 id="green">Prenom de l'admin :</h3>

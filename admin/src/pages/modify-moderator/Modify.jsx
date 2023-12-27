@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import check from "../../../public/images/Check All.png";
-import search from "../../../public/images/search.png";
+import check from "/images/CheckAll.png";
+import search from "/images/Search.png";
 import Navbar from "../../components/navbar_admin/Navbar";
 const Modify = () => {
     return(  

@@ -1,9 +1,10 @@
-import "./moderator.css";
-import check from "../../../public/images/check All.png";
-import search from "../../../public/images/search.png";
-import pen from "../../../public/images/pen.png";
-import trash from "../../../public/images/trash.png";
+import check from "/images/CheckAll.png";
+import search from "/images/Search.png";
+import pen from "/images/pen.png";
+import trash from "/images/trash.png";
 import Navbar from "../../components/navbar-moderator/Navbar";
+import "./moderator.css";
+
 const Moderator = () => {
     return(  
 <div className='moderattor'>       
