@@ -1,24 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import check from "../../../public/images/Check All.png";
 import search from "../../../public/images/search.png";
-import Navbar from "../../components/navbar_admin/Navbar";
+import Navbar from "../../components/navbar-moderator/Navbar";
 const Modify = () => {
     return(  
         <div className='moood'>
           < Navbar/>
-        <div className='titllle'>
-        <button id="btn11" >   Articles </button>
+          <div className='titlllee'>
+        <button id="btnn1" >   Articles </button>
         <img id="immg2" src={search} /> 
-        <button id="info"> Informations   </button>
+        <button id="infoo"> Informations   </button>
         <img id="immg2" src={check} />
-        </div>
+        </div> 
         <div className='containner'>
-        <div className='titllle1'>
-        <button id="white" >   Gérer moderateurs </button> 
-        <button id="greenn"> Ajouter un moderateur  </button>
-        <button id="white"> Mes Informations  </button>
-       
-        </div>
+
         <h2 id="green">Les Informations de l'admin:</h2>
         <h3 id="green">Nom de l'admin :</h3>
         <input id="Inputt" type="text" placeholder="Nom"/>

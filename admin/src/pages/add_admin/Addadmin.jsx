@@ -7,12 +7,7 @@ const Addadmin = () => {
     return(  
         <div className='moood'>
           < Navbar/>
-        <div className='titllle'>
-        <button id="btn11" >   Articles </button>
-        <img id="immg2" src={search} /> 
-        <button id="info"> Informations   </button>
-        <img id="immg2" src={check} />
-        </div>
+  
         <div className='containner'>
         <div className='titllle1'>
         <button id="white" >   Gérer moderateurs </button> 
