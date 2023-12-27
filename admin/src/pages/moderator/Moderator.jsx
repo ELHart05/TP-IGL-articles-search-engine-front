@@ -5,9 +5,9 @@ import trash from "/images/trash.png";
 import Navbar from "../../components/navbar-moderator/Navbar";
 import "./moderator.css";
 
-const Moderator = () => {
+const GererArticle = () => {
     return(  
-<div className='moderattor'>       
+<div className='moderattor min-h-screen'>       
           < Navbar/> 
           <div className='titlllee'>
         <button id="btnn1" >   Articles </button>
@@ -61,4 +61,4 @@ const Moderator = () => {
 
     );
 }
-export default Moderator ;
+export default GererArticle ;
