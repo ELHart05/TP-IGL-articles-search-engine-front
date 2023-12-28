@@ -11,7 +11,7 @@ const Home = () => {
     const [user, setUser] = useState(true);
 
     useEffect(() => {
-        //add getting user data logic
+        //add getting user data logic...
     }, [])
 
     return (
