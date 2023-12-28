@@ -11,10 +11,6 @@ const guesstNavItems = [
         link: '/'
     },
     {
-        name: 'About us',
-        link: '/about-us'
-    },
-    {
         name: 'Sign in',
         link: '/auth/sign-in'
     },
@@ -34,8 +30,8 @@ const loggedInNavItems = [
         link: '/search'
     },
     {
-        name: 'About us',
-        link: '/about-us'
+        name: 'Saved',
+        link: '/saved'
     }
 ]
 

@@ -4,25 +4,57 @@ import Info3 from "/images/Home/Information/information3.svg"
 
 const Informations = () => {
     return (
-        <section className='flex flex-col gap-3 text-white'>
-            <div className={`flex flex-col-reverse lg:flex-row bg-second`}>
-                <div className='w-full lg:w-[55%] flex items-center'>
-                    <p className="font-semibold px-6 [@media(min-width:_580px)]:px-16 pt-8 pb-11 text-justify text-xs [@media(min-width:_580px)]:text-[17px] xl:text-xl">
-                        &nbsp;&nbsp;&nbsp;&nbsp; At [Your App Name], our team is the driving force behind the seamless and innovative experience we deliver. Comprising passionate individuals with diverse expertise, we come together with a shared commitment to excellence in the realm of scientific discovery. From seasoned developers ensuring a robust and user-friendly platform to dedicated researchers curating and validating content, each member plays a pivotal role. Our collaborative spirit fosters an environment where creativity and expertise intersect, resulting in a dynamic space that continually evolves to meet the needs of our users. With a shared vision for advancing the boundaries of knowledge, our team is dedicated to making [Your App Name] the go-to destination for those hungry for insightful and diverse scholarly exploration.
-                    </p>
+        <section className='flex flex-col md:flex-row gap-3 text-white'>
+            <div className='flex flex-col gap-6 md:gap-8 bg-second md:w-2/3 p-4 md:p-8'>
+                <p className="text-lg">Welcome to PapersHub! We are a team of dedicated students from the Higher School of Computer Science in Algeria, passionate about delivering a seamless and enriching article-reading experience to our users.</p>
+                <div>
+                    <h3 className="font-bold text-lg md:text-xl mb-2">Mission and Vision</h3>
+                    <p className="p-3 pt-0">Our mission is to empower users to explore, discover, and save articles that resonate with them. We aim to provide a user-friendly platform that enables easy access to a wide range of articles while offering personalized options for research and exploration.</p>
                 </div>
-                <div className='w-full lg:w-[45%]'>
-                    <img src={Info1} alt="Information" className="w-full" />
+                <div>
+                    <h3 className="font-bold text-lg md:text-xl mb-2">Team Members</h3>
+                    <ul className="list-disc list-inside p-3 pt-0">
+                        <li>Allaoua Okba</li>
+                        <li>Arab Hamza</li>
+                        <li>Cherfa Mohamed</li>
+                        <li>Boukefallah Abdoullah</li>
+                        <li>Boubenia Walid</li>
+                        <li>Benkhelifa Bouchra</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="font-bold text-lg md:text-xl mb-2">Values and Principles</h3>
+                    <p className="p-3 pt-0">At PapersHub, we uphold principles of accuracy, reliability, inclusivity, and user-centricity. We are committed to continuously improving our app to meet user needs effectively.</p>
+                </div>
+                <div>
+                    <h3 className="font-bold text-lg md:text-xl mb-2">App Features</h3>
+                    <h4>Explore PapersHub to discover:</h4>
+                    <ul className="list-disc list-inside p-3">
+                        <li>Access to a vast collection of articles</li>
+                        <li>Customizable search options for a personalized reading experience</li>
+                        <li>Like and Save feature to curate your list of preferred articles</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 className="font-bold text-lg md:text-xl mb-2">Development Journey</h3>
+                    <p className="p-3 pt-0">Our journey began with a shared passion for creating a platform that simplifies article exploration. Throughout our development process, we encountered challenges, learned valuable lessons, and celebrated milestones that shaped PapersHub into the app you see today.</p>
+                </div>
+                <div>
+                    <h3 className="font-bold text-lg md:text-xl mb-2">Acknowledgments & Credits</h3>
+                    <p className="p-3 pt-0">We extend our gratitude to Mr. Soufiane Batata, our esteemed coordinator and mentor, whose guidance and support have been invaluable in bringing PapersHub to fruition.</p>
                 </div>
             </div>
-            {/* <div className='flex flex-col [@media(min-width:_580px)]:flex-row gap-0 [@media(min-width:_580px)]:gap-4'>
-                <div className='flex items-center w-full [@media(min-width:_580px)]:w-[55%]'>
-                    <img src={Info2} alt="Information" className="w-full" />
+            <div className='grid grid-cols-2 md:grid-cols-1 md:w-1/3 overflow-hidden scrollbar-hide scollbar-hide'>
+                <div className='flex items-center w-full bg-no-repeat bg-top bg-[url("/images/Home/Information/information1.svg")]'>
+                    <img src={Info1} alt="Information" className="aspect-square opacity-0" />
                 </div>
-                <div className='w-full [@media(min-width:_580px)]:w-[45%]'>
-                    <img src={Info3} alt="Information" className="w-full" />
+                <div className='flex items-center w-full bg-no-repeat bg-top bg-[url("/images/Home/Information/information2.svg")]'>
+                    <img src={Info2} alt="Information" className="aspect-square opacity-0" />
                 </div>
-            </div> */}
+                <div className='flex items-center w-full bg-no-repeat bg-top bg-[url("/images/Home/Information/information3.svg")] col-span-2 md:col-span-1'>
+                    <img src={Info3} alt="Information" className="aspect-square opacity-0" />
+                </div>
+            </div>
         </section>
     )
 }

@@ -13,10 +13,6 @@ const guesstNavItems = [
         link: '/'
     },
     {
-        name: 'About us',
-        link: '/about-us'
-    },
-    {
         name: 'Sign in',
         link: '/auth/sign-in'
     },
@@ -36,8 +32,8 @@ const loggedInNavItems = [
         link: '/search'
     },
     {
-        name: 'About us',
-        link: '/about-us'
+        name: 'Saved',
+        link: '/saved'
     }
 ]
 
@@ -57,7 +53,7 @@ const Navbar = ({ accessToken }) => {
                 case '/search':
                     setActiveLink(1);
                     break;
-                case '/about-us':
+                case '/saved':
                     setActiveLink(2);
                     break;
                 default:
@@ -69,14 +65,11 @@ const Navbar = ({ accessToken }) => {
                 case '/':
                     setActiveLink(0);
                     break;
-                case '/about-us':
+                case '/auth/sign-in':
                     setActiveLink(1);
                     break;
-                case '/auth/sign-in':
-                    setActiveLink(2);
-                    break;
                 case '/auth/sign-up':
-                    setActiveLink(3);
+                    setActiveLink(2);
                     break;
                 default:
                     setActiveLink(-1);

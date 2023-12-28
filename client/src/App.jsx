@@ -10,6 +10,7 @@ import Signup from "./pages/auth/sign-up/pageSignup"
 import ProfileInfo from "./pages/profile/profileInfo"
 import ArticleDetails from "./pages/article-details"
 import Favorite from "./pages/favorite/index.jsx"
+import Saved from "./pages/saved/index.jsx"
 
 function App() {
   const [informations, setInfo] = useState([
@@ -25,6 +26,7 @@ function App() {
         <Route path="/profile" element={<ProfileInfo informations={informations}/>} />
         <Route path="/article-details" element={<ArticleDetails/>} />
         <Route path="/favorite" element={<Favorite/>} />
+        <Route path="/saved" element={<Saved/>} />
         <Route
           path="/about"
           element={

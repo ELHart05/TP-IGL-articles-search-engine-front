@@ -17,8 +17,14 @@ const Home = () => {
     return (
         <Layout isLoading={false}>
             <div className='pb-10'>
-                {!user ? <Hero /> : <SearchBar />}
-                <div className='flex flex-col gap-16 mt-20 px-9'>
+                {!user && <Hero />}
+                <div className={`flex flex-col gap-16 ${(user) ? 'mt-10' : 'mt-20'} px-9`}>
+                    {user && 
+                    <div>
+                        <h3 className='text-lg sm:text-xl font-bold w-fit'>Welcome <span className='text-red'>Amel</span></h3>
+                        <h4 className='text-sm mb-4 sm:text-lg w-fit'>Filter and search then  explore  your articles</h4>
+                        <SearchBar />
+                    </div>}
                     {!user && <WhyUs />}
                     <ArticlesList />
                     <Informations />
