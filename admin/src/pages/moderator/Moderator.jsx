@@ -10,10 +10,11 @@ const GererArticle = () => {
 <div className='moderattor min-h-screen'>       
           < Navbar/> 
           <div className='titlllee'>
-        <button id="btnn1" >   Articles </button>
-        <img id="immg2" src={search} /> 
-        <button id="infoo"> Informations   </button>
+        <button id="bt1" >   Articles </button>
+        <button id="info"> Informations   </button>
         <img id="immg2" src={check} />
+        <img id="immg2" src={search} />
+       
         </div>    
         <div className='containner'>
             <div className='ligne'>

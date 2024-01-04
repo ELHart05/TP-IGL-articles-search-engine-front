@@ -35,7 +35,7 @@
     border-radius: 10px;
    
 }
-#btn1 {
+#bt1 {
     position: relative;
     top: 15%;
     width:70px;
@@ -70,8 +70,11 @@
 #info {
     margin: 15px;
     height: 35px;
-    width: 35%;
-    box-shadow: #004D40;
+    width: 38%;
+    border-radius: 10px;
+    box-shadow: #2e2e2e;
+    background-color: rgb(240, 240, 240);
+
 }
 .containner{
     display: grid;

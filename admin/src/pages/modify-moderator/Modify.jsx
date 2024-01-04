@@ -6,10 +6,10 @@ const Modify = () => {
         <div className='moood min-h-screen'>
           < Navbar/>
           <div className='titlllee'>
-        <button id="btnn1" >   Articles </button>
-        <img id="immg2" src={search} /> 
+        <button id="info" >   Articles </button>
         <button id="infoo"> Informations   </button>
         <img id="immg2" src={check} />
+        <img id="immg2" src={search} />
         </div> 
         <div className='containner'>
         <h2 className="font-bold" id="green">Information de moderateur:</h2>
