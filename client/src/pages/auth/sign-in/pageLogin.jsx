@@ -58,7 +58,7 @@ const Login = () => {
                     <label htmlFor="password" className="hidden">Password</label>
                     <div className="w-full flex">
                         <input type={active? "text" : "password"} id="password" minLength="8" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required className="w-full px-6 border-b-2 border-[#004D40] bg-transparent py-1 focus:outline-none placeholder:text-[20px]"/>
-                        <div onClick={()=> setActive(!active)} className="p-1 bg-transparent cursor-pointer border-b-2 border-[#004D40]">Visible</div>
+                        <div onClick={()=> setActive(!active)} className="p-1 bg-transparent cursor-pointer border-b-2 border-[#004D40]">{!active ? 'Visible': 'Hide'}</div>
                     </div>
                     <div className="flex flex-col items-center w-full py-19 gap-7">
                         <button className="w-full bg-[#004D40] hover:bg-[#004D40]/[0.8] transition-colors duration-[0.5s] py-5 rounded-3xl text-white text-[20px]">Sign In</button>

@@ -8,7 +8,7 @@ import './style.css';
 import SearchBar from '../../components/search_section/Search_bar';
 
 const Home = () => {
-    const [user, setUser] = useState(true);
+    const [user, setUser] = useState(false);
 
     useEffect(() => {
         //add getting user data logic...

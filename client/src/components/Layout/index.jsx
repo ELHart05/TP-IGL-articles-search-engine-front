@@ -5,7 +5,7 @@ import Loading from '../../components/Loading'
 import './style.css';
 
 const Layout = ({ isLoading, children }) => {
-    const [accessToken, setAccessToken] = useState(true);
+    const [accessToken, setAccessToken] = useState(false);
 
     useEffect(() => {
         //add getting token logic

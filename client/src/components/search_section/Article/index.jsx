@@ -4,7 +4,7 @@ import NotFavorite from '/images/Home/ArticlesList/favorite-off.svg'
 
 const Article = ({ head, paragraph, title, favorite, id }) => {
     return (
-        <Link to={'article/'+id} className="w-full md:p-2 flex flex-col gap-4 transition-all hover:rotate-1 cursor-pointer">
+        <Link to={'/article/'+id} className="w-full md:p-2 flex flex-col gap-4 transition-all hover:rotate-1 cursor-pointer">
             <div className='bg-white flex flex-col rounded-lg px-8 py-6 hover:rotate-1 transition-all'>
                 <div className='flex items-center justify-center flex-col'>
                     <h5 className='text-md sm:text-lg font-bold text-center'>{head}</h5>

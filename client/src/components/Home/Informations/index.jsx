@@ -44,7 +44,7 @@ const Informations = () => {
                     <p className="p-3 pt-0">We extend our gratitude to Mr. Soufiane Batata, our esteemed coordinator and mentor, whose guidance and support have been invaluable in bringing PapersHub to fruition.</p>
                 </div>
             </div>
-            <div className='grid grid-cols-2 md:grid-cols-1 md:w-1/3 overflow-hidden scrollbar-hide scollbar-hide'>
+            <div className='grid grid-cols-2 gap-y-2 md:grid-cols-1 md:w-1/3 overflow-hidden scrollbar-hide scollbar-hide'>
                 <div className='flex items-center w-full bg-no-repeat bg-top bg-[url("/images/Home/Information/information1.svg")]'>
                     <img src={Info1} alt="Information" className="aspect-square opacity-0" />
                 </div>
