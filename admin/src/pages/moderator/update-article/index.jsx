@@ -10,16 +10,26 @@ const ArticleView = ({ mod }) => {
 
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
-            title: mod.title,
-            profs: mod.authors.join(', ')
+            title: '' ?? mod.title,
+            authors: '' ?? mod.authors.join(', '),
+            institutions: '' ?? mod.institutions.join(', '),
+            keywords: '' ?? mod.keywords.join(', '),
+            abstract: '' ?? mod.abstract,
+            text: '' ?? mod.text,
+            references: '' ?? mod.references.join('; '),
         }
     })
 
     const onSubmit = (data) => {
         //TODO/ handle update article logic
-        const req = {...data, profs: profs.trim().split(',')}
+        const req = {
+            ...data,
+            authors: authors.trim().split(','),
+            institutions: institutions.trim().split(','),
+            keywords: keywords.trim().split(','),
+            references: references.trim().split(';'),
+        }
         console.log(req)
-        
     }
 
     const onApprove = (data) => {
@@ -38,7 +48,7 @@ const ArticleView = ({ mod }) => {
         },
     })
 
-    const profsRegister = register('profs', {
+    const commaSeparatedRegister = (attribute) => register(attribute, {
         required: {
             value: true,
             message: 'Field is required to proceed'
@@ -57,10 +67,47 @@ const ArticleView = ({ mod }) => {
                     errors={errors}
                 />
                 <Input
-                    labelTitle={"Auteur d'article"}
+                    labelTitle={"Auteurs d'article"}
                     placeholder={'Eg: Arab, Allaoua, Boubenia (separate with ",")'}
-                    attribute={'profs'}
-                    register={profsRegister}
+                    attribute={'authors'}
+                    register={commaSeparatedRegister('authors')}
+                    errors={errors}
+                />
+                <Input
+                    labelTitle={"Intritutions d'article"}
+                    placeholder={'Eg: ESI Algiers, ESI SBA, ESTIN (separate with ",")'}
+                    attribute={'institutions'}
+                    register={commaSeparatedRegister('institutions')}
+                    errors={errors}
+                />
+                <Input
+                    labelTitle={"Keywords"}
+                    placeholder={'Eg: CICD, UML, IGL (separate with ",")'}
+                    attribute={'keywords'}
+                    register={commaSeparatedRegister('keywords')}
+                    errors={errors}
+                />
+                <Input
+                    labelTitle={"Abstract"}
+                    placeholder={'Eg: Lorem ipsum dolor sit amet consectetur...'}
+                    attribute={'abstract'}
+                    register={commaSeparatedRegister('abstract')}
+                    errors={errors}
+                    textArea={true}
+                />
+                <Input
+                    labelTitle={"Text"}
+                    placeholder={'Eg: lougga ipsum dolor sit amet consectetur...'}
+                    attribute={'text'}
+                    register={commaSeparatedRegister('text')}
+                    errors={errors}
+                    textArea={true}
+                />
+                <Input
+                    labelTitle={"References"}
+                    placeholder={'Eg: CEUR Workshop Proceedings, 2017; UML; Mr BATATA Course 2024 (separate with ";")'}
+                    attribute={'references'}
+                    register={commaSeparatedRegister('references')}
                     errors={errors}
                 />
                 <div className='flex gap-x-4 gap-y-1 items-center flex-wrap'>

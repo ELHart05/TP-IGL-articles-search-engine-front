@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
 import LayoutAdmin from '../../../components/admin/LayoutAdmin'
 import Input from '../../../components/common/Input'
+import API from '../../../utils/api-client'
 import './style.css'
-import axios from 'axios'
 
 const AddModerator = () => {
 
@@ -17,7 +17,7 @@ const AddModerator = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await axios.post('http://localhost:8000/paperhub/moderator/add-moderator/', {
+            const response = await API.post('/paperhub/moderator/add-moderator/', {
                 modName: data.modName,
                 email: data.email,
                 password: data.password,

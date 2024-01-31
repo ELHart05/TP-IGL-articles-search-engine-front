@@ -1,8 +1,8 @@
 import { useForm } from 'react-hook-form'
 import LayoutMod from '../../../components/mod/LayoutMod'
 import Input from '../../../components/common/Input'
-import './style.css'
 import API from '../../../utils/api-client'
+import './style.css'
 
 const ProfileMod = () => {
 
@@ -19,21 +19,28 @@ const ProfileMod = () => {
         try {
             const response = await API.put(`/paperhub/moderator/update_moderator/${userId}`, {
                 user: {
-                  username: data.modName,
-                  email: data.email, 
-                  password: data.password,
+                    username: data.modName,
+                    email: data.email, 
+                    password: data.password,
                 },
-              });
-      
+            });
+
             if (response.status === 200) {
-              console.log('Profile updated successfully');
+                console.log('Profile updated successfully');
             } else {
-              const errorData = await response.json();
-              console.error('Error updating profile:', errorData);
+                const errorData = await response.json();
+                console.error('Error updating profile:', errorData);
             }
-          } catch (error) {
+        } catch (error) {
             console.error('Error updating profile:', error.message);
-          }
+            toast({
+                status: 'error',
+                title: 'Error fetching data',
+                description: 'Something went error, please try again!',
+                duration: 6000,
+                isClosable: true
+            })
+        }
     }
 
     const textRegister = (attribute) => register(attribute, {

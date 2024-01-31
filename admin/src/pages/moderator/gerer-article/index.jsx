@@ -48,52 +48,7 @@ const ArticleItem = ({ articles,setArticles,index, id, title, approved }) => {
     )
 }
 
-export let articlesList = [
-    {
-        id: 1694,
-        title: 'Machine learning algorithms',
-        profs: ['Arab', 'Allaoua', 'Batata'],
-        approved: false
-    },
-    {
-        id: 1695,
-        title: 'Machine learning algorithms',
-        profs: ['Arab', 'Allaoua', 'Batata'],
-        approved: true
-    },
-    {
-        id: 1696,
-        title: 'Machine learning algorithms',
-        profs: ['Arab', 'Allaoua', 'Batata'],
-        approved: false
-    },
-    {
-        id: 1697,
-        title: 'Machine learning algorithms',
-        profs: ['Arab', 'Allaoua', 'Batata'],
-        approved: false
-
-    },
-    {
-        id: 1698,
-        title: 'Machine learning algorithms',
-        profs: ['Arab', 'Allaoua', 'Batata'],
-        approved: false
-    },
-    {
-        id: 1699,
-        title: 'Machine learning algorithms',
-        profs: ['Arab', 'Allaoua', 'Batata'],
-        approved: false
-
-    },
-    {
-        id: 1700,
-        title: 'Machine learning algorithms',
-        profs: ['Arab', 'Allaoua', 'Batata'],
-        approved: true
-    }
-]
+export let articlesList = []
 
 const GererArticle = () => {
 
