@@ -2,21 +2,34 @@ import { useForm } from 'react-hook-form'
 import LayoutAdmin from '../../../components/admin/LayoutAdmin'
 import Input from '../../../components/common/Input'
 import './style.css'
+import axios from 'axios'
 
 const AddModerator = () => {
 
     const { handleSubmit, register, formState: { errors }, watch } = useForm({
         defaultValues: {
-            firstName: '',
-            lastName: '',
+            modName: '',
+            email: '',
             password: '',
             confirmPassword: ''
         }
     })
 
-    const onSubmit = (data) => {
-        //TODO/ handle add mod logic
-        console.log(data)
+    const onSubmit = async (data) => {
+        try {
+            const response = await axios.post('http://localhost:8000/paperhub/moderator/add-moderator/', {
+                modName: data.modName,
+                email: data.email,
+                password: data.password,
+            });
+            if (response.status === 200) {
+                console.log('Moderator added successfully');
+            } else {
+                console.error('Failed to add moderator');
+            }
+        } catch (error) {
+            console.error('Error adding moderator:', error);
+        }
     }
 
     const textRegister = (attribute) => register(attribute, {
@@ -53,15 +66,15 @@ const AddModerator = () => {
                 <Input
                     labelTitle={'Nom modérateur'}
                     placeholder={'Eg: Hamza'}
-                    attribute={'firstName'}
-                    register={textRegister('firstName')}
+                    attribute={'modName'}
+                    register={textRegister('modName')}
                     errors={errors}
                 />
                 <Input
-                    labelTitle={'Prénom modérateur'}
-                    placeholder={'Eg: ARAB'}
-                    attribute={'lastName'}
-                    register={textRegister('lastName')}
+                    labelTitle={'Email modérateur'}
+                    placeholder={'Eg: Hamza@gmail.com'}
+                    attribute={'email'}
+                    register={textRegister('email')}
                     errors={errors}
                 />
                 <Input

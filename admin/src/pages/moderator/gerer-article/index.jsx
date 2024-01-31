@@ -1,14 +1,26 @@
 import { Link } from 'react-router-dom'
-// import { useState } from 'react'
+import axios from "axios"
+import { useState,useEffect } from 'react'
 import LayoutMod from '../../../components/mod/LayoutMod'
 import './style.css'
+import API from '../../../utils/api-client'
 
-const ArticleItem = ({ index, id, title, profs, approved }) => {
+const ArticleItem = ({ articles,setArticles,index, id, title, approved }) => {
 
-    const deleteArticle = (id) => {
-        //TODO: add delete article logic
-        console.log(id)
-    }
+    const deleteArticle = async (id) => {
+        try {
+          const response = await API.get(`/elasticsearch/delete_article/${id}/`);
+          console.log(response.data.message);
+    
+          // If the deletion was successful, update the articles state
+          if (response.status === 200) {
+            const updatedArticles = articles.filter(article => article.id !== id);
+            setArticles(updatedArticles);
+          }
+        } catch (error) {
+          console.error('Error deleting article:', error.message);
+        }
+      };
 
     return (
         <div className='w-full border-2 border-black rounded-xl px-4 py-3 gap-x-4 gap-y-2 flex items-center justify-between flex-wrap-reverse'>
@@ -19,12 +31,10 @@ const ArticleItem = ({ index, id, title, profs, approved }) => {
                 <span className='text-xl'>{index}</span>
             </div>
             <div className='text-lg sm:text-xl lg:text-2xl'>
-                <span>{title}</span>
-            </div>
-            <div className='text-lg sm:text-xl lg:text-2xl'>
-                <span>{profs.map((prof, index) => (
-                    <span key={index}>{'Pr.'+prof+' '}</span>
-                ))}</span>
+                <span>{
+                    title.length <= 80 ? title : `${title.slice(0,80)}...`   
+                }
+                </span>
             </div>
             <div className='flex gap-2'>
                 <Link to={'/moderator/gerer-article/'+id} className='cursor-pointer transition-all hover:-translate-x-1 flex'>
@@ -38,7 +48,7 @@ const ArticleItem = ({ index, id, title, profs, approved }) => {
     )
 }
 
-export const articlesList = [
+export let articlesList = [
     {
         id: 1694,
         title: 'Machine learning algorithms',
@@ -87,11 +97,29 @@ export const articlesList = [
 
 const GererArticle = () => {
 
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [articles, setArticles] = useState([]);
     // setInterval(() => {
     //     setIsLoading(false)
     // }, 5000)
     //this is just an example of loading
+
+    useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response = await API.get("/elasticsearch/get_articles_mod/");
+            const data = response.data;
+            setArticles(data);
+            articlesList = data
+            setIsLoading(false);
+          } catch (error) {
+            console.error('Error fetching data:', error);
+            setIsLoading(false);
+          }
+        };
+    
+        fetchData();
+      }, []); 
 
     return (
         <LayoutMod isLoading={false ?? isLoading}>
@@ -100,11 +128,12 @@ const GererArticle = () => {
                     <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
                 </div>
                 <div className='w-full gap-4 grid grid-cols-1'>
-                    {articlesList.map(({ id, title, profs, approved }, index) => (
+                    {articles.map(({ id, title, approved }, index) => (
                         <ArticleItem
+                            articles={articles}
+                            setArticles={setArticles}
                             id={id}
                             title={title}
-                            profs={profs}
                             approved={approved}
                             index={index}
                             key={index}

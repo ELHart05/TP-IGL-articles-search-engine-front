@@ -13,7 +13,7 @@ import ProfileMod from "./pages/moderator/profile";
 import GererArticle from "./pages/moderator/gerer-article";
 import UpdateArticle from "./pages/moderator/update-article";
 
-import Error from "./pages/error"
+
 
 function App() {
   return (
