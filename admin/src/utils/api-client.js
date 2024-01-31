@@ -3,8 +3,7 @@ import Cookie from "js-cookie"
 import { SERVER_URL } from "../../constants";
 
 const API = axios.create({
-    baseURL: SERVER_URL[import.meta.env.VITE_ENVIRONMENT],
-    timeout: 12000
+    baseURL: SERVER_URL.development,
 })
 
 API.interceptors.request.use((async (config) => {

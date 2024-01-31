@@ -11,7 +11,7 @@ const ArticleView = ({ mod }) => {
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
             title: mod.title,
-            profs: mod.profs.join(', ')
+            profs: mod.authors.join(', ')
         }
     })
 

@@ -2,21 +2,38 @@ import { useForm } from 'react-hook-form'
 import LayoutMod from '../../../components/mod/LayoutMod'
 import Input from '../../../components/common/Input'
 import './style.css'
+import API from '../../../utils/api-client'
 
 const ProfileMod = () => {
 
     const { handleSubmit, register, formState: { errors }, watch } = useForm({
         defaultValues: {
-            firstName: '',
-            lastName: '',
+            modName: '',
+            email: '',
             password: '',
             confirmPassword: ''
         }
     })
 
-    const onSubmit = (data) => {
-        //TODO/ handle update profile logic
-        console.log(data)
+    const onSubmit = async (data) => {
+        try {
+            const response = await API.put(`/paperhub/moderator/update_moderator/${userId}`, {
+                user: {
+                  username: data.modName,
+                  email: data.email, 
+                  password: data.password,
+                },
+              });
+      
+            if (response.status === 200) {
+              console.log('Profile updated successfully');
+            } else {
+              const errorData = await response.json();
+              console.error('Error updating profile:', errorData);
+            }
+          } catch (error) {
+            console.error('Error updating profile:', error.message);
+          }
     }
 
     const textRegister = (attribute) => register(attribute, {
@@ -53,15 +70,15 @@ const ProfileMod = () => {
                 <Input
                     labelTitle={'Nom mod'}
                     placeholder={'Eg: Walid'}
-                    attribute={'firstName'}
-                    register={textRegister('firstName')}
+                    attribute={'modName'}
+                    register={textRegister('modName')}
                     errors={errors}
                 />
                 <Input
-                    labelTitle={'Prénom mod'}
+                    labelTitle={'Email mod'}
                     placeholder={'Eg: BOUBENIA'}
-                    attribute={'lastName'}
-                    register={textRegister('lastName')}
+                    attribute={'email'}
+                    register={textRegister('email')}
                     errors={errors}
                 />
                 <Input

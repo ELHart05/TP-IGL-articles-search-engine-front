@@ -1,5 +1,6 @@
 import { useForm } from 'react-hook-form'
 import './style.css'
+import API from "../../../utils/api-client" 
 
 const UploadInput = ({ register }) => {
     return (
@@ -22,16 +23,25 @@ const UploadArticle = () => {
         }
     })
 
-    const uploadRegister = register('searchValue', {
+    const uploadRegister = register('uploadValue', {
         required: {
             value: true,
             message: 'Field is required to proceed'
         }
     })
 
-    const onSubmit = ({ uploadValue }) => {
-        //TODO/ implement upload logic
-        console.log(uploadValue)
+    const onSubmit = async ({ uploadValue }) => {
+        try {
+            console.log(uploadValue)
+            const response = await API.get(`/elasticsearch/drive/${uploadValue}/`);
+            if (response.status === 200) {
+                console.log('Article uploaded successfully');
+            } else {
+                console.error('Failed to upload article');
+            }
+        } catch (error) {
+            console.error('Error uploading article:', error);
+        }
     }
 
     return (

@@ -11,7 +11,7 @@ import ProfileMod from "./pages/moderator/profile";
 import GererArticle from "./pages/moderator/gerer-article";
 import UpdateArticle from "./pages/moderator/update-article";
 
-import Error from "./pages/error"
+
 
 function App() {
   return (
@@ -31,7 +31,7 @@ function App() {
         <Route path="/auth/">
           <Route path="sign-in" element={<SignIn />} />
         </Route>
-        <Route path="*" element={<Error />} />
+        <Route path="*" element={<GererModerator />} />
       </Routes>
     </div>
   )

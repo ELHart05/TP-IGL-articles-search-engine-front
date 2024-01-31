@@ -1,13 +1,25 @@
 import { Link } from 'react-router-dom'
-// import { useState } from 'react'
+import { useState,useEffect } from 'react'
+import axios from 'axios'
 import LayoutAdmin from '../../../components/admin/LayoutAdmin'
 import './style.css'
+import API from '../../../utils/api-client'
 
-const ModItem = ({ index, name, id }) => {
+const ModItem = ({ moderators,setModerators,index, name, id }) => {
 
-    const deleteMod = (id) => {
-        //TODO: delete mod
-        console.log(id)
+    const deleteMod =  async (id) => {
+        try {
+            const response = await API.delete(`/paperhub/moderator/delete-moderator/${id}/`);
+            console.log(response.data.message);
+      
+            // If the deletion was successful, update the articles state
+            if (response.status === 200) {
+              const updatedModerator = moderators.filter(mod => mod.id !== id);
+              setModerators(updatedModerator);
+            }
+          } catch (error) {
+            console.error('Error deleting article:', error.message);
+          }
     }
 
     return (
@@ -22,9 +34,7 @@ const ModItem = ({ index, name, id }) => {
                 <span>{name}</span>
             </div>
             <div className='flex gap-2'>
-                <Link to={'/admin/gerer-moderator/'+id} className='cursor-pointer transition-all hover:-translate-x-1 flex'>
-                    <img className='h-6 w-6 sm:h-10 sm:w-10 lg:h-8 lg:w-8' src="/panel/images/mods/Marker.svg" alt="Marker" />
-                </Link>
+
                 <div className='cursor-pointer transition-all hover:-translate-x-1 flex' onClick={() => deleteMod(id)}>
                     <img className='h-6 w-6 sm:h-10 sm:w-10 lg:h-8 lg:w-8' src="/panel/images/mods/Trash.svg" alt="Trash" />
                 </div>
@@ -33,7 +43,8 @@ const ModItem = ({ index, name, id }) => {
     )
 }
 
-export const modsList = [
+
+export let modsList = [
     {
         id: 1694,
         firstName: 'Okba',
@@ -87,12 +98,29 @@ export const modsList = [
 ]
 
 const GererModerator = () => {
-
-    // const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(true);
+    const [moderators, setModerators] = useState([]);
     // setInterval(() => {
     //     setIsLoading(false)
     // }, 5000)
     //this is just an example of loading
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const response = await API.get("/paperhub/moderator/get_moderators/");
+                const data = response.data;  // Use response.data directly
+                setModerators(data);
+                modsList = data;
+                setIsLoading(false);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                setIsLoading(false);
+            }
+        };
+    
+        fetchData();
+    }, []);
+    
 
     return (
         <LayoutAdmin isLoading={false ?? isLoading}>
@@ -101,10 +129,12 @@ const GererModerator = () => {
                     <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
                 </div>
                 <div className='w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-                    {modsList.map(({ id, firstName, lastName }, index) => (
+                    {moderators.map(({ id, user }, index) => (
                         <ModItem
+                            moderators={moderators}
+                            setModerators={setModerators}
                             id={id}
-                            name={firstName+' '+lastName}
+                            name={user.username}
                             index={index}
                             key={index}
                         />
