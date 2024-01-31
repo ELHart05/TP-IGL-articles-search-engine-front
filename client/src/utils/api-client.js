@@ -6,7 +6,8 @@ let refresh = false;
 
 const API = axios.create({
   baseURL: SERVER_URL[import.meta.env.VITE_ENVIRONMENT],
-  timeout: 12000
+  timeout: 12000,
+  withCredentials: true
 });
 
 API.interceptors.request.use(async (config) => {

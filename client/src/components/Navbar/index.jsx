@@ -106,7 +106,7 @@ const Navbar = ({ accessToken }) => {
     }
 
     return (
-        <header className='relative flex px-9 2sm:px-12 py-6 items-center justify-between border-b-2 border-green'>
+        <header className='relative flex px-6 2sm:px-12 py-6 items-center justify-between border-b-2 border-green'>
             <div className='font-bold relative z-50'>
                 <Link to="/" className='logo'>
                     PapersHub

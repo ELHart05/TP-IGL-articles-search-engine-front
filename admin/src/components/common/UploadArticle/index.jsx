@@ -22,7 +22,7 @@ const UploadArticle = () => {
         }
     })
 
-    const uploadRegister = register('searchValue', {
+    const uploadRegister = register('uploadValue', {
         required: {
             value: true,
             message: 'Field is required to proceed'

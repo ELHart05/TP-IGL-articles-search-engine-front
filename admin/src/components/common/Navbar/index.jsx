@@ -1,10 +1,15 @@
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import './style.css'
 
 const Navbar = () => {
 
+    const navigate = useNavigate();
+
     const handleLogout = () => {
-        //TODO: handle logic
-        console.log('logged out')
+        Cookies.remove('PHaccessToken');
+        Cookies.remove('PHuser');
+        navigate('/auth/sign-in');
     }
 
     return (

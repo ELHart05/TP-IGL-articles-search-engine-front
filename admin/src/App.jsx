@@ -1,4 +1,6 @@
-import { Route, Routes } from "react-router-dom"
+import { Navigate, Route, Routes } from "react-router-dom"
+//import middleware
+import PrivateRoute from './middleware/PrivateRoute'
 //auth imports
 import SignIn from "./pages/auth/sign-in";
 //admin imports
@@ -17,19 +19,21 @@ function App() {
   return (
     <div className="bg-[#f5f5f5]">
       <Routes>
-        <Route path="/admin/">
-          <Route path="profile" element={<ProfileAdmin />} />
-          <Route path="add-moderator" element={<AddModerator />} />
-          <Route path="gerer-moderator" element={<GererModerator />} />
-          <Route path="gerer-moderator/:id" element={<UpdateModerator />} />
-        </Route>
-        <Route path="/moderator/">
-          <Route path="profile" element={<ProfileMod />} />
-          <Route path="gerer-article" element={<GererArticle />} />
-          <Route path="gerer-article/:id" element={<UpdateArticle />} />
-        </Route>
         <Route path="/auth/">
           <Route path="sign-in" element={<SignIn />} />
+        </Route>
+        <Route path="/admin/">
+          <Route path="profile" element={<PrivateRoute element={<ProfileAdmin />} requiredRoles={['admin']} />} />
+          <Route path="add-moderator" element={<PrivateRoute element={<AddModerator />} requiredRoles={['admin']} />} />
+          <Route path="gerer-moderator" element={<PrivateRoute element={<GererModerator />} requiredRoles={['admin']} />} />
+          <Route path="gerer-moderator/:id" element={<PrivateRoute element={<UpdateModerator />} requiredRoles={['admin']} />} />
+          <Route path="*" element={(<Navigate to={'profile'} />)} />
+        </Route>
+        <Route path="/moderator/" >
+          <Route path="profile" element={<PrivateRoute element={<ProfileMod />} requiredRoles={['moderator']} />} />
+          <Route path="gerer-article" element={<PrivateRoute element={<GererArticle />} requiredRoles={['moderator']} />} />
+          <Route path="gerer-article/:id" element={<PrivateRoute element={<UpdateArticle />} requiredRoles={['moderator']} />} />
+          <Route path="*" element={(<Navigate to={'profile'} />)} />
         </Route>
         <Route path="*" element={<Error />} />
       </Routes>

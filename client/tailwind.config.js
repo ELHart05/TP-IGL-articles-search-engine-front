@@ -12,7 +12,8 @@ export default {
         "green": "#64928a",
         "dark-gray": "#727171",
         "background":"#F9F9F9",
-        "red": "#800020"
+        "Pred": "#800020",
+        "Pgreen": '#004D40'
       },
       fontFamily: {
         "main": ["Inter", "sans-serif"],

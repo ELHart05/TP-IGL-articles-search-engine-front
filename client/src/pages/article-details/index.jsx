@@ -1,192 +1,184 @@
+import { Link } from 'react-router-dom'
+import Layout from '../../components/Layout'
 
-import { useState } from 'react';
-import Arrow from '/images/articleDetails/back-arrow.svg';
-import Download from '/images/articleDetails/download.svg';
-import Layout from '../../components/Layout';
-
-const article = {
-  title: "Sample Article Title",
-  authors: [
-    {
-      name: "Author 1",
-      institution: "Institution A",
-    },
-    {
-      name: "Author 2",
-      institution: "Institution B",
-    },
-    {
-      name: "Author 3",
-      institution: "Institution C",
-    },
-  ],
-  summary: "This is a summary of the article.",
-  keywords: ["Keyword 1", "Keyword 2", "Keyword 3"],
-  introduction: "This is the introduction of the article.",
-  mainContent: "This is the main content of the article.",
-  conclusion: "This is the conclusion of the article.",
-  resources: [
-    {
-      title: "Resource 1",
-      link: "https://example.com/resource1",
-    },
-    {
-      title: "Resource 2",
-      link: "https://example.com/resource2",
-    },
-    
-  ],
-};
-
-function ArticleDeatils() {
-  const [isBlack, setIsBlack] = useState(false);
-
-  const handleColorChange = () => {
-    setIsBlack(!isBlack); 
-  };
+const ArticleAuthor = ({ name, institution }) => {
   return (
-    <Layout isLoading={false}>
-      <div className='bg-background '>
-
-    
-        <div className='font-main flex flex-col justify-center items-center mt-16 mb-4' >
-        
-          <div className="bg-white w-95  rounded-lg   pt-8 ">
-            <div className='flex  flex-col items-center'>
-            <h1 className='text-20 font-bold  pb-4  '>
-            {article.title}
-        </h1>
-        <div class="w-1/3 h-1  bg-blue"></div>
-            </div>
-        
-
-
-
-        <div className='flex flex-col p-10 2sm:flex-row'>
-        {article.authors.map((author, index) => (
-    <div className='flex items-center pr-4 pl-4' key={index}>
-      <div className="w-15 h-15 rounded-full bg-second"></div>
-      <div className='pl-2'>
-        <h5 className='font-semibold '>{author.name}</h5>
-        <h5>{author.institution}</h5>
+    <div className='flex gap-2 items-center transition-all hover:translate-y-1'>
+      <img src="/images/ellipse-red.svg" alt="Ellipse" />
+      <div className='flex flex-col font-bold'>
+        <h5 className='text-lg'>{name}</h5>
+        <span className='text-md'>{institution}</span>
       </div>
     </div>
-  ))}
-        </div>
-      
-    
-    <div className=' flex w-95 justify-between '>
-
-  <div className='flex flex-col w-50'>
-  <div className='bg-main  text-white p-8  flex  flex-col items-center' >
-  <h2 className='text-20 font-semibold'>Sammary</h2>
-  <p>{article.summary}</p>
-
-  </div>
-
-  <div className='p-2' >
-  <h2 className='text-20 font-semibold'>Keywords</h2>
-  <div className='flex flex-col 2sm:flex-row w-100'>
-    {article.keywords.map((word,index)=>(
-      <div className='flex items-center pr-8'>
-        <div className='w-15 h-15 rounded-full bg-blue '></div>
-      <h6 className='pl-2'>  {word}</h6>
-      </div>
-
-    ))}
-  </div>
-  </div>
-
-  </div>
-
-
-
-
-
-
-  <div className=' flex w-50 flex-col items-center '>
-  <h2 className='text-20 font-semibold'>Introduction</h2>
-  <p> {article.introduction}</p>
-  </div>
-
-    </div>
-
-
-
-  <p className='p-8'>
-  {article.mainContent}
-  </p>
-        <div className='p-8'>
-          <h2 className=' text-20 font-semibold'> Conclusion</h2>
-          <p>
-            {article.conclusion}
-          </p>
-          </div> 
-      <div className='flex  flex-col items-center'>
-      <div className='w-1/3 h-1  bg-second ' ></div>
-      </div>
-          
-
-          <div className='p-2'>
-            <h2 className='text-20 font-semibold'>Refrences</h2>
-                            
-            {article.resources.map((word,index)=>(
-              <div className='flex items-center'>
-        <div className='w-15 h-15 rounded-full bg-second '></div>
-      <div className='flex flex-col items-start  pr-8 2sm:flex-row'>
-        
-      <h6 className='pl-2'>  {word.title} </h6>
-      <h6 className='pl-2'>  {word.link} </h6>
-
-      </div>
-              </div>
-            
-
-    ))}
-          </div>
-
-
-        </div>
-
-        <div className='flex justify-between text-white w-95 pt-8'>
-        <img className='h-30 w-30' src={Arrow}   />
-
-        <div className='flex items-center'>
-        <button className='w-150 h-50 bg-second rounded-15 mr-8 flex flex-col items-center justify-center hover:bg-main'>
-          
-              <div className='flex items-center'>
-                <h6 className='font-semibold pr-2'>        Pdf Version</h6>
-                <img className='h-15 w-15' src={Download}  />
-              </div>
-          
-          </button>
-
-
-          <svg
-          className="h-30 w-30"
-          onClick={handleColorChange}
-          width="800px"
-          height="800px"
-          viewBox="0 0 32 32"
-          version="1.1"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <title>heart</title>
-          
-          <path
-            d="M0.256 12.16q0.544 2.080 2.080 3.616l13.664 14.144 13.664-14.144q1.536-1.536 2.080-3.616t0-4.128-2.080-3.584-3.584-2.080-4.16 0-3.584 2.080l-2.336 2.816-2.336-2.816q-1.536-1.536-3.584-2.080t-4.128 0-3.616 2.080-2.080 3.584 0 4.128z"
-          
-            fill={isBlack ? "#EC8607" : "#252A3A"}
-          />
-        </svg>
-
-        </div>
-        </div>
-    
-      </div>
-      </div>
-    </Layout>
-  );
+  )
 }
 
-export default ArticleDeatils;
+const Keyword = ({ name, link }) => {
+  return (
+    <Link to={link} className='flex items-center gap-2 transition-all hover:translate-y-1'>
+      <img src="/images/ellipse-red.svg" alt="Ellipse" />
+      <span className='font-bold text-md'>{name}</span>
+    </Link>
+  )
+}
+
+const Refrence = ({ name, link }) => {
+  return (
+    <Link to={link} className='flex items-center gap-2 transition-all hover:translate-y-1'>
+      <img src="/images/ellipse-red.svg" alt="Ellipse" />
+      <span className='font-bold text-md'>{name}</span>
+    </Link>
+  )
+}
+
+const authors = [
+  {
+    name: 'Author1',
+    institution: 'Institution'
+  },
+  {
+    name: 'Author2',
+    institution: 'Institution'
+  },
+  {
+    name: 'Author3',
+    institution: 'Institution'
+  },
+  {
+    name: 'Author4',
+    institution: 'Institution'
+  },
+]
+
+const references = [
+  {
+    name: 'Reference1',
+    link: '#'
+  },
+  {
+    name: 'Reference2',
+    link: '#'
+  },
+  {
+    name: 'Reference3',
+    link: '#'
+  },
+  {
+    name: 'Reference4',
+    link: '#'
+  },
+  {
+    name: 'Reference5',
+    link: '#'
+  },
+]
+
+const keywords = [
+  {
+    name: 'Keyword1',
+    link: '#'
+  },
+  {
+    name: 'Keyword2',
+    link: '#'
+  },
+  {
+    name: 'Keyword3',
+    link: '#'
+  },
+  {
+    name: 'Keyword4',
+    link: '#'
+  },
+  {
+    name: 'Keyword5',
+    link: '#'
+  },
+]
+
+const paragraphes = [
+  "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is an updated and refined documentation, providing clearer insights into the framework's features and implementations. Furthermore, community contributions play a significant role, enriching Tailwind CSS with user-driven suggestions and collaborative improvements. Collectively, these updates endeavor to elevate the development experience by empowering users to craft more efficient, visually striking, and customizable web applications through Tailwind CSS.",
+  "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is an updated and refined documentation, providing clearer insights into the framework's features and implementations. Furthermore, community contributions play a significant role, enriching Tailwind CSS with user-driven suggestions and collaborative improvements. Collectively, these updates endeavor to elevate the development experience by empowering users to craft more efficient, visually striking, and customizable web applications through Tailwind CSS.",
+  "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is an updated and refined documentation, providing clearer insights into the framework's features and implementations. Furthermore, community contributions play a significant role, enriching Tailwind CSS with user-driven suggestions and collaborative improvements. Collectively, these updates endeavor to elevate the development experience by empowering users to craft more efficient, visually striking, and customizable web applications through Tailwind CSS.",
+  "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is an updated and refined documentation, providing clearer insights into the framework's features and implementations. Furthermore, community contributions play a significant role, enriching Tailwind CSS with user-driven suggestions and collaborative improvements. Collectively, these updates endeavor to elevate the development experience by empowering users to craft more efficient, visually striking, and customizable web applications through Tailwind CSS."
+]
+
+const ArticleDetails = () => {
+  return (
+    <Layout isLoading={false}>
+      <div className='flex flex-col w-full items-center justify-center gap-4 px-5 py-9 md:p-9'>
+        <div className='bg-white w-full py-6 pr-4 flex flex-col items-center gap-6 rounded-xl shadow-xl'>
+          <div className='flex flex-col items-center justify-center gap-4 pl-4'>
+            <h3 className='text-3xl font-bold'>Tailwind updates</h3>
+            <div className='border-b-Pred border-b-4 w-full max-w-[800px]'></div>
+          </div>
+          <div className='w-full overflow-x-scroll flex gap-16 px-1 md:px-4 mt-5 ml-4 scrollbar-hide'>
+            {
+              authors.map((author, index) => (
+                <ArticleAuthor {...author} key={index} />
+              ))
+            }
+          </div>
+          <div className='w-full flex flex-col md:flex-row mt-4'>
+            <div className='w-full md:w-1/2 flex flex-col gap-4 pl-4 md:pl-0'>
+              <div className='w-full bg-Pred text-white px-6 py-4 sm:text-justify md:px-10 md:py-6'>
+                <h5 className='text-center font-bold text-xl w-full mb-3'>Resume</h5>
+                <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is an updated and refined documentation, providing clearer insights into the framework's features and implementations. Furthermore, community contributions play a significant role, enriching Tailwind CSS with user-driven suggestions and collaborative improvements. Collectively, these updates endeavor to elevate the development experience by empowering users to craft more efficient, visually striking, and customizable web applications through Tailwind CSS.</p>
+              </div>
+              <div className='w-full pl-4'>
+                <h6 className='font-bold text-lg ml-4'>Keywords:</h6>
+                <div className='flex mt-4 gap-10 overflow-x-scroll w-full pb-3 scrollbar-hide'>
+                  {
+                    keywords.map((keyword, index) => (
+                      <Keyword {...keyword} key={index} />
+                    ))
+                  }
+                </div>
+              </div>
+            </div>
+            <div className='w-full md:w-1/2 flex flex-col gap-4 items-center px-5 md:px-10 lg:px-20 py-6'>
+              <h5 className='text-center font-bold text-xl w-full'>Introduction</h5>
+              <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is an updated and refined documentation, providing clearer insights into the framework's features and implementations. Furthermore, community contributions play a significant role, enriching Tailwind CSS with user-driven suggestions and collaborative improvements. Collectively, these updates endeavor to elevate the development experience by empowering users to craft more efficient, visually striking, and customizable web applications through Tailwind CSS.</p>
+            </div>
+          </div>
+          <div className='flex flex-col gap-10 items-center ml-4 sm:px-4 md:px-16 pb-4 md:pb-10'>
+            {
+              paragraphes.map((paragraph, index) => (
+                <p className='sm:text-justify' key={index}>
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{paragraph}
+                </p>
+              ))
+            }
+          </div>
+          <div className='ml-4 border-b-Pred border-b-4 w-full max-w-[800px]'></div>
+          <div className='w-full ml-4'>
+            <h6 className='font-bold text-lg ml-4'>Refrences:</h6>
+            <div className='flex mt-4 gap-10 overflow-x-scroll md:px-6 w-full pb-3 scrollbar-hide'>
+              {
+                references.map((reference, index) => (
+                  <Refrence {...reference} key={index} />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        <div className='flex items-center justify-between px-4 w-full'>
+          <Link to='/search' className='cursor-pointer transition-all flex hover:translate-y-1'>
+            <img src="/images/arrow-left.svg" alt="Arrow" />
+          </Link>
+          <div className='flex items-center gap-6'>
+            <button className='flex gap-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl w-full px-4 py-4 font-bold text-lg max-w-full'>
+              <img src="/images/download.svg" alt="Download" />
+              PDF version
+            </button>
+            <div className='cursor-pointer transition-all flex hover:translate-y-1'>
+              <img className='h-10 w-10' src="/images/Home/ArticlesList/favorite-off.svg" alt="Heart" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </Layout>
+  )
+}
+
+export default ArticleDetails

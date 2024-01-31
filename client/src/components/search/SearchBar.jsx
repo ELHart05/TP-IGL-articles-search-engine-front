@@ -46,7 +46,7 @@ const DateElement = () => {
 
 const SearchBar = () => {
   return (
-    <div className='w-full bg-[#800020] rounded-xl text-black p-10 flex flex-col gap-16'>
+    <div className='w-full bg-Pred text-black p-10 flex flex-col gap-16'>
       <div className='w-full flex gap-10 justify-center items-start flex-wrap'>
         {
           ["Keywords", "Authors", "Institutions"].map((element, index) => (

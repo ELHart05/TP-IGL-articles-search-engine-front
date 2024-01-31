@@ -1,13 +1,57 @@
 import { useEffect, useState } from "react";
 import API from "../../utils/api-client";
 import Layout from "../../components/Layout";
-import Article from '../../components/search_section/Article/index';
-import SearchBar from "../../components/search_section/Search_bar";
-import { articles } from "../../components/Home/ArticlesList";
+import Article from '../../components/search/Article/index';
+import SearchBar from "../../components/search/SearchBar";
 
 const Search = () => {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
+
+    const articles = [
+        {
+            head: "Resume1",
+            paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
+            title: "Title",
+            favorite: false,
+            id: "1"
+        },
+        {
+            head: "Resume2",
+            paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
+            title: "Title",
+            favorite: true,
+            id: "2"
+        },
+        {
+            head: "Resume3",
+            paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
+            title: "Title",
+            favorite: true,
+            id: "3"
+        },
+        {
+            head: "Resume1",
+            paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
+            title: "Title",
+            favorite: true,
+            id: "1"
+        },
+        {
+            head: "Resume2",
+            paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
+            title: "Title",
+            favorite: true,
+            id: "2"
+        },
+        {
+            head: "Resume3",
+            paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
+            title: "Title",
+            favorite: true,
+            id: "3"
+        },
+    ]
 
     useEffect(() => {
         API.get('/posts')

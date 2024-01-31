@@ -13,7 +13,7 @@ API.interceptors.request.use((async (config) => {
     if (accessCookie) {
         config.headers.Authorization = `Bearer ${accessCookie}`
     }
-    return config; 
+    return config;
 }))
 
 export default API;

@@ -18,7 +18,7 @@ const reasons = [
 
 const WhyUs = () => {
     return (
-        <section className="px-9 flex flex-col md:flex-row items-center gap-8 md:gap-6">
+        <section className="sm:px-9 flex flex-col md:flex-row items-center gap-8 md:gap-6">
             <div className="md:w-1/2">
                 <img src={Papers} alt="Papers" className="hover:-rotate-6 transition-all" />
             </div>
