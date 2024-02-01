@@ -1,25 +1,27 @@
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import AuthInput from '../../../components/auth/AuthInput'
 import API from '../../../utils/api-client'
-import './style.css'
 import Cookies from 'js-cookie'
-import { useToast } from '@chakra-ui/toast'
+import Spinner from 'react-spinner-material'
+import { toast } from 'react-toastify';
+import './style.css'
 
 const SignUp = () => {
 
     const navigate = useNavigate();
-    const toast = useToast();
+    const [isLoading, setIsLoading] = useState(false);
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            name: '',
+            username: '',
             email: '',
             password: ''
         }
     })
 
-    const nameRegister = register('name', {
+    const usernameRegister = register('username', {
         required: {
             value: true,
             message: 'Name is required to proceed'
@@ -53,38 +55,41 @@ const SignUp = () => {
     })
 
     const onSubmit = async (data) => {
-        console.log(data)
         //todo: add auth logic
         try {
-            const res = await API.post('token', {
+            setIsLoading(true)
+            const res = await API.post('paperhub/user/signup/', {
                 ...data
             })
 
-            const { access, refresh } = res.data;
+            console.log(res.data)
 
-            Cookies.set('PHaccessToken', access);
-            Cookies.set('PHrefreshToken', refresh);
+            // const { access, refresh } = res.data;
+
+            // Cookies.set('PHaccessToken', access);
+            // Cookies.set('PHrefreshToken', refresh);
 
             navigate('/profile');
 
-            toast({
-                title: 'Login success',
-                description: 'Welcome back',
-                duration: 5000,
-                isClosable: true,
-                colorScheme: 'success',
-                position: 'bottom'
+            toast.success('Welcome back', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
             })
 
         } catch (error) {
-            toast({
-                title: 'Error',
-                description: 'Something went error',
-                duration: 5000,
-                isClosable: true,
-                colorScheme: 'error',
-                position: 'bottom'
+            console.log(error)
+            toast.error('Something went wrong, try again!', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
             })
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -97,11 +102,11 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4 items-center max-w-[650px]">
                     <h1 className='text-3xl font-bold mb-10 text-center'>Welcome to <span className='text-Pred'>PapersHub</span></h1>
                     <div className='flex flex-col gap-10 w-full'>
-                        <AuthInput register={nameRegister} attribute='name' errors={errors} />
+                        <AuthInput register={usernameRegister} attribute='name' errors={errors} />
                         <AuthInput register={emailRegister} attribute='email' errors={errors} />
                         <AuthInput register={passwordRegister} attribute='password' errors={errors} />
                     </div>
-                    <button className='mt-12 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl w-full px-4 py-4 font-bold text-lg max-w-full'>SignUp</button>
+                    <button className='mt-12 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl w-full px-4 py-4 font-bold text-lg max-w-full flex items-center justify-center'>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'SignUp'}</button>
                     <div className='mt-4'>
                         <p className='font-bold text-lg text-center'>Already have an account? <Link to='/auth/sign-in' className='text-Pred cursor-pointer hover:underline'>SignIn!</Link></p>
                     </div>

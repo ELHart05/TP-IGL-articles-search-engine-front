@@ -1,10 +1,10 @@
-// import Cookies from "js-cookie"
+import isValidUser from "../../utils/isValidUser"
 
 const WelcomeUser = () => {
-    // const user = JSON?.parse(Cookies?.get('PHuser'))
+    const { user } = isValidUser();
     return (
         <>
-            Welcome <span className='text-Pred'>{'Amel'}</span>
+            Welcome <span className='text-Pred'>{user?.username}</span>
         </>
     )
 }

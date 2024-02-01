@@ -1,11 +1,13 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Favorite from '/images/Navbar/favorite.svg';
 import Menu from '/images/Navbar/menu.svg';
 import SignOut from '/images/Navbar/signout.svg';
 import Profile from '/images/Navbar/profile.svg';
+import API from '../../utils/api-client';
+import { toast } from 'react-toastify';
 import './style.css';
-import axios from 'axios';
+import Cookies from 'js-cookie';
 
 const guesstNavItems = [
     {
@@ -37,12 +39,13 @@ const loggedInNavItems = [
     }
 ]
 
-const Navbar = ({ accessToken }) => {
+const Navbar = ({ accessToken, user }) => {
 
     const { pathname } = useLocation();
     const [activeLink, setActiveLink] = useState(0);
     const [navbarOpen, setNavbarOpen] = useState(false);
     const [profileInfoOpen, setProfileInfoOpen] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (accessToken) {
@@ -80,28 +83,34 @@ const Navbar = ({ accessToken }) => {
 
     const signOut = async () => {
         try {
-            await axios.post(
-                'http://localhost:8000/auth/logout/',
-                {
-                    refresh_token: localStorage.getItem('refresh_token'),
-                },
-                {
-                    headers: {
-                        'Content-Type': 'application/json',
-                },
-                    withCredentials: true,
-                }
-            );
-            // Clear local storage
-            localStorage.clear();
-            // Clear Authorization header
-            axios.defaults.headers.common['Authorization'] = null;
+            const res = await API.post('auth/logout/', {
+                refresh_token: Cookies.get('PHrefreshToken')
+            });
+
+            console.log(res)
+
+            Cookies.remove('PHuser');
+            Cookies.remove('PHrefreshToken');
+            Cookies.remove('PHaccessToken');
+
+            toast.success('Good bye', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
 
             // Redirect to the login page
-            window.location.href = '/auth/sign-in';
-
+            navigate('/auth/sign-in');
         } catch (error) {
-            console.error('Logout not working', error);
+            toast.error('Error', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
         }
     }
 
@@ -147,7 +156,7 @@ const Navbar = ({ accessToken }) => {
                             <img src={Favorite} alt="Favorite" className='w-6 h-6' />
                         </Link>
                         <button onClick={() => {setProfileInfoOpen((prev) => !prev); navbarOpen && setNavbarOpen(false)}} className='transition-all font-bold rounded-full p-1 bg-black text-white'>
-                            OA
+                            {user.username.slice(0, 2).toUpperCase()}
                         </button>
                     </div>
                 }

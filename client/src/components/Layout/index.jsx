@@ -6,11 +6,11 @@ import './style.css';
 import isValidUser from '../../utils/isValidUser';
 
 const Layout = ({ isLoading, children }) => {
-    const { accessToken } = isValidUser();
+    const { accessToken, user } = isValidUser();
 
     return (
         <div className='flex flex-col min-h-screen'>
-            <Navbar accessToken={accessToken} />
+            <Navbar accessToken={accessToken} user={user} />
             <main className='bg-[#f9f9f9] flex items-stretch flex-1'>
                 {isLoading ? <Loading /> : children}
             </main>

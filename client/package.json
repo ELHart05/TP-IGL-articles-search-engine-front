@@ -9,14 +9,14 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@chakra-ui/toast": "^7.0.2",
     "axios": "^1.6.2",
     "js-cookie": "^3.0.5",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.3",
     "react-router-dom": "^6.20.1",
-    "react-spinner-material": "^1.4.0"
+    "react-spinner-material": "^1.4.0",
+    "react-toastify": "^10.0.4"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",
