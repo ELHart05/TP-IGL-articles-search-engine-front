@@ -6,14 +6,13 @@ const PrivateRoute = ({ element }) => {
     const navigate = useNavigate();
     const { user, accessToken, isValidAuth } = isValidUser();
 
-    // useEffect(() => {
-    //     if (!isValidAuth) {
-    //         navigate('/auth/sign-in');
-    //     }
-    // }, [accessToken, user, isValidAuth]);
+    useEffect(() => {
+        if (!isValidAuth) {
+            navigate('/auth/sign-in');
+        }
+    }, [accessToken, user, isValidAuth]);
 
-    // return isValidAuth ? element : null;
-    return element;
+    return isValidAuth ? element : null;
 };
 
 export default PrivateRoute;

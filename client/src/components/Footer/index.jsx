@@ -30,8 +30,8 @@ const loggedInNavItems = [
         link: '/search'
     },
     {
-        name: 'Saved',
-        link: '/saved'
+        name: 'Favotire',
+        link: '/favorite'
     }
 ]
 

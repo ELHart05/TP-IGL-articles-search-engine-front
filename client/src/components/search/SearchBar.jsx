@@ -1,6 +1,9 @@
 import SearchIcon from '/images/Home/search.svg'
 import Chevron from '/images/Home/chevron.svg'
 import { useState } from 'react'
+import { toast } from 'react-toastify';
+import { useForm } from 'react-hook-form';
+import API from '../../utils/api-client';
 
 const SearchElement = ({ name }) => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -45,6 +48,49 @@ const DateElement = () => {
 }
 
 const SearchBar = () => {
+
+  const { register, handleSubmit, formState: { errors } } = useForm({
+    defaultValues: {
+      search_query: ''
+    }
+  })
+  const searchRegister = register('search_query', {
+    required: {
+        value: true,
+        message: 'Search value is required to proceed'
+    }
+  })
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const onSubmit = async ({ search_query }) => {
+    try {
+      setIsLoading(true)
+      const res = await API.get(`elasticsearch/search/${search_query}/`)
+
+      console.log(res.data)
+
+      toast.success('Search results are here!', {
+          position: "top-center",
+          autoClose: 5000,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "light",
+      })
+
+    } catch (error) {
+        toast.error('Something went wrong, try again!', {
+            position: "top-center",
+            autoClose: 5000,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "light",
+        })
+    } finally {
+        setIsLoading(false)
+    }
+  }
+
   return (
     <div className='w-full bg-Pred text-black p-10 flex flex-col gap-16'>
       <div className='w-full flex gap-10 justify-center items-start flex-wrap'>
@@ -55,12 +101,15 @@ const SearchBar = () => {
         }
         <DateElement />
       </div>
-      <div className='flex justify-center'>
-        <div className='relative flex w-full max-w-2xl'>
-          <input id="searchBar" type="text" placeholder='Search...' className='w-full bg-white p-2 pl-4 outline-none focus:border-rose-400' />
-          <label htmlFor="searchBar" className='cursor-pointer'>
+      <div className='flex items-center flex-col'>
+        <form onSubmit={handleSubmit(onSubmit)} className='relative flex w-full max-w-2xl'>
+          <input {...searchRegister} id="searchBar" type="text" placeholder='Search...' className='w-full bg-white p-2 pl-4 outline-none focus:border-rose-400' />
+          <button className='cursor-pointer'>
             <img src={SearchIcon} alt="Search Icon" className='z-10 h-8 w-8 absolute right-2 top-1 ' />
-          </label>
+          </button>
+        </form>
+        <div className='flex items-start mt-2'>
+          {errors?.search_query && <p className='text-red-500'>{errors?.search_query?.message}</p>}
         </div>
       </div>
     </div>

@@ -89,7 +89,7 @@ const Profile = () => {
     return (
         <Layout isLoading={false}>
             <div className='flex flex-col gap-6 p-5 md:p-9 w-full'>
-                <h1 className='text-lg sm:text-xl font-bold w-fit'><WelcomeUser /> to Your saved articles</h1>
+                <h1 className='text-lg sm:text-xl font-bold w-fit'><WelcomeUser /> to Your Profile</h1>
                 <div className="flex w-full items-center justify-center mt-20 py-20 bg-Pgreen rounded-xl text-white p-4">
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col relative items-center gap-8 w-full md:w-[80%]">
                         <div className="bg-black text-white font-bold p-4 aspect-square flex items-center justify-center rounded-full text-4xl absolute -top-[120px] z-30">

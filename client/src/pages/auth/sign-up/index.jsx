@@ -55,19 +55,17 @@ const SignUp = () => {
     })
 
     const onSubmit = async (data) => {
-        //todo: add auth logic
         try {
             setIsLoading(true)
             const res = await API.post('paperhub/user/signup/', {
                 ...data
             })
 
-            console.log(res.data)
+            const { access_token, refresh_token, user } = res.data;
 
-            // const { access, refresh } = res.data;
-
-            // Cookies.set('PHaccessToken', access);
-            // Cookies.set('PHrefreshToken', refresh);
+            Cookies.set('PHaccessToken', access_token);
+            Cookies.set('PHrefreshToken', refresh_token);
+            Cookies.set('PHuser', JSON.stringify(user));
 
             navigate('/profile');
 
@@ -80,7 +78,6 @@ const SignUp = () => {
             })
 
         } catch (error) {
-            console.log(error)
             toast.error('Something went wrong, try again!', {
                 position: "top-center",
                 autoClose: 5000,

@@ -1,6 +1,5 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import Favorite from '/images/Navbar/favorite.svg';
 import Menu from '/images/Navbar/menu.svg';
 import SignOut from '/images/Navbar/signout.svg';
 import Profile from '/images/Navbar/profile.svg';
@@ -34,8 +33,8 @@ const loggedInNavItems = [
         link: '/search'
     },
     {
-        name: 'Saved',
-        link: '/saved'
+        name: 'Favorite',
+        link: '/favorite'
     }
 ]
 
@@ -56,7 +55,7 @@ const Navbar = ({ accessToken, user }) => {
                 case '/search':
                     setActiveLink(1);
                     break;
-                case '/saved':
+                case '/favorite':
                     setActiveLink(2);
                     break;
                 default:
@@ -81,7 +80,7 @@ const Navbar = ({ accessToken, user }) => {
         }
     }, [pathname])
 
-    const signOut = async () => {
+    const handleSignOut = async () => {
         try {
             const res = await API.post('auth/logout/', {
                 refresh_token: Cookies.get('PHrefreshToken')
@@ -152,9 +151,6 @@ const Navbar = ({ accessToken, user }) => {
                 {
                     !!accessToken &&
                     <div className='2sm:mt-0 mt-6 flex gap-6 2sm:gap-4 items-center flex-col 2sm:flex-row'>
-                        <Link to="/favorite" className='transition-all hover:translate-y-1'>
-                            <img src={Favorite} alt="Favorite" className='w-6 h-6' />
-                        </Link>
                         <button onClick={() => {setProfileInfoOpen((prev) => !prev); navbarOpen && setNavbarOpen(false)}} className='transition-all font-bold rounded-full p-1 bg-black text-white'>
                             {user.username.slice(0, 2).toUpperCase()}
                         </button>
@@ -167,7 +163,7 @@ const Navbar = ({ accessToken, user }) => {
                             <img src={Profile} alt="User" className='w-7 h-7' />
                             Profile
                         </Link>
-                        <button onClick={signOut} className='flex flex-wrap justify-center gap-2 items-center cursor-pointer transition-all hover:translate-y-1 text-dark-gray hover:text-black'>
+                        <button onClick={handleSignOut} className='flex flex-wrap justify-center gap-2 items-center cursor-pointer transition-all hover:translate-y-1 text-dark-gray hover:text-black'>
                             <img src={SignOut} alt="User" className='w-7 h-7' />
                             Sign Out
                         </button>
