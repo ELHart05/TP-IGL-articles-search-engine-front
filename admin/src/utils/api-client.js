@@ -1,6 +1,7 @@
 import axios from "axios"
 import Cookies from "js-cookie"
 import { SERVER_URL } from "../../constants";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const API = axios.create({
     baseURL: SERVER_URL.development,
@@ -16,5 +17,20 @@ API.interceptors.request.use(async (config) => {
     }
     return config;
 });
+
+API.interceptors.response.use(
+    function (response) {
+        return response;
+    },
+    function (error) {
+        if (error?.response?.data?.code == "token_not_valid" || error?.response?.request?.responseURL?.includes('undefined')) {
+            Cookies.remove('PHuser');
+            Cookies.remove('PHaccessToken');
+            Cookies.remove('PHrefreshToken');
+            location.reload()
+        }
+        return error;
+    }
+);
 
 export default API;
