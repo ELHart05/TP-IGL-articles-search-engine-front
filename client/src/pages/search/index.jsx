@@ -2,7 +2,7 @@ import Layout from "../../components/Layout";
 import SearchBar from "../../components/search/SearchBar";
 import { useForm } from "react-hook-form";
 import Article from '../../components/search/Article';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import API from '../../utils/api-client';
 import Spinner from 'react-spinner-material';
@@ -17,6 +17,36 @@ const Search = () => {
         Authors: "",
         Institutions: ""
     });
+
+    useEffect(() => {
+        const getAllArticles = async () => {
+        try {
+            const res = await API.get(`elasticsearch/get_data/`);
+            setSearchArticles(res.data);
+        
+            toast.success('Article loaded successfully!', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+
+        } catch (error) {
+                toast.error(error?.response?.data?.error ?? 'Error', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+                navigate('/search')
+            } finally {
+                setIsLoading(false);
+            }
+        }
+        getAllArticles()
+    }, [])
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {

@@ -35,7 +35,7 @@ const SearchBar = ({ searchRegister, handleSubmit, errors, onSubmit, setFilters,
       <h2 className='font-bold text-center text-white text-2xl'>Search for the article you want to discover!</h2>
       <div className='flex items-center flex-col'>
         <form onSubmit={handleSubmit(onSubmit)} className='relative flex w-full max-w-2xl'>
-          <input {...searchRegister} id="searchBar" type="text" placeholder='Search...' className='w-full bg-white p-2 pl-4 outline-none border-2 focus:border-blue-500 transition-all' />
+          <input {...searchRegister} id="searchBar" type="text" placeholder='Try "computer"...' className='w-full bg-white p-2 pl-4 outline-none border-2 focus:border-blue-500 transition-all' />
           <button className='cursor-pointer'>
             <img src={SearchIcon} alt="Search Icon" className='z-10 h-8 w-8 absolute right-2 top-1 ' />
           </button>

@@ -34,8 +34,6 @@ const ModView = ({ mod }) => {
                 draggable: true,
                 theme: "light",
             })
-
-            // navigate('/admin/gerer-moderator');
         } catch (error) {
             console.log(error)
             toast.error('Error!', {

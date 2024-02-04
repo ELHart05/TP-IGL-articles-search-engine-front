@@ -69,6 +69,7 @@ const GererArticle = () => {
             try {
                 const response = await API.get("/elasticsearch/get_articles_mod/");
                 const data = response.data;
+                console.log(data)
                 setArticles(data);
                 toast.success('Articles loaded!', {
                     position: "top-center",
@@ -77,15 +78,14 @@ const GererArticle = () => {
                     draggable: true,
                     theme: "light",
                 })
-                articlesList = data;
             } catch (error) {
-                toast.error('Something went wrong, try again!', {
-                    position: "top-center",
-                    autoClose: 5000,
-                    pauseOnHover: true,
-                    draggable: true,
-                    theme: "light",
-                })
+                // toast.error('Something went wrong, try again!', {
+                //     position: "top-center",
+                //     autoClose: 5000,
+                //     pauseOnHover: true,
+                //     draggable: true,
+                //     theme: "light",
+                // })
             } finally {
                 setIsLoading(false);
             }

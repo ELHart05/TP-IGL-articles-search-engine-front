@@ -1,6 +1,9 @@
 import { useForm } from 'react-hook-form'
 import './style.css'
 import API from "../../../utils/api-client" 
+import { useState } from 'react'
+import { toast } from 'react-toastify';
+import Spinner from 'react-spinner-material'
 
 const UploadInput = ({ register }) => {
     return (
@@ -30,17 +33,40 @@ const UploadArticle = () => {
         }
     })
 
+    const [isLoading, setIsLoading] = useState(false);
+
     const onSubmit = async ({ uploadValue }) => {
         try {
+            setIsLoading(true)
             console.log(uploadValue)
             const response = await API.get(`/elasticsearch/drive/${uploadValue}/`);
             if (response.status === 200) {
-                console.log('Article uploaded successfully');
+                toast.success('Article uploaded successfully', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             } else {
-                console.error('Failed to upload article');
+                toast.error('Failed to upload article', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             }
         } catch (error) {
-            console.error('Error uploading article:', error);
+            toast.error('Error uploading article', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -48,7 +74,7 @@ const UploadArticle = () => {
         <form onSubmit={handleSubmit(onSubmit)} className='bg-white flex items-center justify-between gap-4 px-4 md:px-8 py-3 rounded-xl flex-wrap'>
             <label htmlFor="uploader" className='text-center shadow-lg cursor-pointer bg-Pgreen text-white rounded-xl px-4 pb-2 pt-1 font-bold text-md'>Uploader des articles</label>
             <UploadInput register={uploadRegister} />
-            <button className='text-center shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl px-4 pb-2 pt-1 font-bold text-md'>Upload</button>
+            <button className='flex items-center justify-center text-center shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl px-8 pb-2 pt-1 font-bold text-md' disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Upload'}</button>
         </form>
     )
 }

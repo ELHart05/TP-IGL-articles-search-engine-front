@@ -10,7 +10,7 @@ import './style.css'
 const ArticleView = ({ article }) => {
 
     const navigate = useNavigate();
-
+    console.log(article.references)
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
             title: article?.title,
@@ -19,7 +19,7 @@ const ArticleView = ({ article }) => {
             keywords: article?.keywords.join(', '),
             content: article?.content,
             resume: article?.resume,
-            refrences: article?.refrences.join('; '),
+            references: article?.references.join('; '),
         }
     })
 
@@ -141,8 +141,8 @@ const ArticleView = ({ article }) => {
                 <Input
                     labelTitle={"Refrences"}
                     placeholder={'Eg: CEUR Workshop Proceedings, 2017; UML; Mr BATATA Course 2024 (separate with ";")'}
-                    attribute={'refrences'}
-                    register={commaSeparatedRegister('refrences')}
+                    attribute={'references'}
+                    register={commaSeparatedRegister('references')}
                     errors={errors}
                 />
                 <div className='flex gap-x-4 gap-y-1 items-center flex-wrap'>
@@ -167,7 +167,7 @@ const UpdateArticle = () => {
                 setIsLoading(true);
     
                 const res = await API.get(`elasticsearch/get_article_id/${id}/`)
-
+                console.log(res.data)
                 setArticle(res.data)
     
                 toast.success('Account updated successfully', {
@@ -192,6 +192,7 @@ const UpdateArticle = () => {
 
         currentArticle()
     }, [])
+
 
     return (
         <LayoutMod isLoading={isLoading}>

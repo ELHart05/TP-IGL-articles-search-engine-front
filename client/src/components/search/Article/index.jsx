@@ -47,7 +47,7 @@ const Article = ({ resume, title, id, index }) => {
                     <hr className='bg-green mt-2 h-1 text-center w-1/2' />
                 </div>
                 <div className='mt-5'>
-                    <p>{resume}...</p>
+                    <p>{resume.slice(0, 250)}...</p>
                 </div>
             </Link>
             <div className='flex items-center justify-between px-4'>
