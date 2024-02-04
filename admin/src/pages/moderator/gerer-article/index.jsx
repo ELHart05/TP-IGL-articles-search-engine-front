@@ -5,7 +5,7 @@ import API from '../../../utils/api-client'
 import { toast } from 'react-toastify';
 import './style.css'
 
-const ArticleItem = ({ articles,setArticles,index, id, title, approved }) => {
+const ArticleItem = ({ articles, setArticles, index, id, title, approved }) => {
 
     const deleteArticle = async (id) => {
         try {
@@ -69,7 +69,6 @@ const GererArticle = () => {
             try {
                 const response = await API.get("/elasticsearch/get_articles_mod/");
                 const data = response.data;
-                console.log(data)
                 setArticles(data);
                 toast.success('Articles loaded!', {
                     position: "top-center",
@@ -79,13 +78,13 @@ const GererArticle = () => {
                     theme: "light",
                 })
             } catch (error) {
-                // toast.error('Something went wrong, try again!', {
-                //     position: "top-center",
-                //     autoClose: 5000,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     theme: "light",
-                // })
+                toast.error('Something went wrong, try again!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             } finally {
                 setIsLoading(false);
             }
@@ -97,9 +96,6 @@ const GererArticle = () => {
     return (
         <LayoutMod isLoading={isLoading}>
             <div className='flex items-center justify-center mt-2 gap-4'>
-                {/* <div className='cursor-pointer h-10 w-10'>
-                    <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
-                </div> */}
                 <div className='w-full gap-4 grid grid-cols-1'>
                     {articles.map(({ id, title, approved }, index) => (
                         <ArticleItem
@@ -113,9 +109,6 @@ const GererArticle = () => {
                         />
                     ))}
                 </div>
-                {/* <div className='cursor-pointer h-10 w-10 rotate-180'>
-                    <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
-                </div> */}
             </div>
         </LayoutMod>
     )

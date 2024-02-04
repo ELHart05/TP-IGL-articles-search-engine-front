@@ -14,7 +14,7 @@ const Layout = ({ isLoading, children }) => {
             <main className='bg-[#f9f9f9] flex items-stretch flex-1'>
                 {isLoading ? <Loading /> : children}
             </main>
-            <Footer accessToken={accessToken} />
+            <Footer accessToken={accessToken} user={user} />
         </div>
     )
 }

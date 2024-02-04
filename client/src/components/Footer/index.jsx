@@ -30,7 +30,7 @@ const loggedInNavItems = [
         link: '/search'
     },
     {
-        name: 'Favotire',
+        name: 'Favorite',
         link: '/favorite'
     }
 ]
@@ -69,23 +69,33 @@ const footerSubList = [
     }
 ]
 
-const Footer = ({ accessToken }) => {
+const Footer = ({ accessToken, user }) => {
     return (
         <footer className={`z-0 px-9 py-16 2sm:py-24 text-white flex flex-col gap-8 text-md md:text-lg ${(accessToken) ? 'bg-green' : 'bg-second'}`}>
             <div className='flex flex-col gap-4 sm:gap-0 sm:flex-row items-center justify-between'>
                 <div className='text-xl font-bold relative z-50'>
                     <Link to="/" className='logo'>
-                        PapersHub
+                        <img src="/logo.svg" alt="Logo" />
                     </Link>
                 </div>
                 <div>
                     <ul className='flex items-center gap-4 flex-wrap justify-center'>
                         {
-                            ((accessToken) ? loggedInNavItems : guesstNavItems ).map(({ link, name }, index) => (
-                                <li key={index}>
-                                    <Link className='cursor-pointer capitalize transition-all text-white hover:text-main' to={link}>{name}</Link>
-                                </li>
-                            ))
+                            (
+                                (accessToken) 
+                                ?
+                                (!user?.is_superuser || !user?.is_staff)
+                                ?
+                                loggedInNavItems
+                                :
+                                loggedInNavItems.slice(0, -1)
+                                :
+                                guesstNavItems
+                            ).map(({ link, name }, index) => (
+                                    <li key={index}>
+                                        <Link className='cursor-pointer capitalize transition-all text-white hover:text-main' to={link}>{name}</Link>
+                                    </li>
+                                ))
                         }
                     </ul>
                 </div>

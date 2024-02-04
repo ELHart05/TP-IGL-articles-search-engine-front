@@ -46,7 +46,7 @@ const ProfileMod = () => {
             if (response.status === 200) {
                 Cookies.set('PHuser', JSON.stringify({
                     ...JSON.parse(Cookies.get('PHuser')),
-                    username: userData.username,
+                    username: userData.modName,
                     email: userData.email
                 }))
                 toast.success('Profile updated successfully', {
@@ -133,7 +133,7 @@ const ProfileMod = () => {
                     register={passwordCofirmRegister}
                     errors={errors}
                 />
-                <button className='flex items-center justify-center mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl w-full px-4 pt-2 pb-3 font-bold text-lg max-w-full'disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Appliquer changment'}</button>
+                <button className='flex items-center justify-center mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl w-full px-4 pt-2 pb-3 font-bold text-lg max-w-full' disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Appliquer changment'}</button>
             </form>
         </LayoutMod>
     )

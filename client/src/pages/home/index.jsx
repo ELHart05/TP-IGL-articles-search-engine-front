@@ -1,18 +1,17 @@
 import Layout from '../../components/Layout';
 import Hero from '../../components/Home/Hero';
-import ArticlesList from '../../components/Home/ArticlesList';
 import WhyUs from '../../components/Home/WhyUs';
 import Informations from '../../components/Home/Informations';
 import SearchBar from '../../components/search/SearchBar';
 import WelcomeUser from '../../components/WelcomeUser';
 import isValidUser from '../../utils/isValidUser';
-import './style.css';
 import Article from '../../components/search/Article';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import API from '../../utils/api-client';
 import Spinner from 'react-spinner-material';
+import './style.css';
 
 const Home = () => {
 
@@ -30,7 +29,7 @@ const Home = () => {
     useEffect(() => {
         const getAllArticles = async () => {
         try {
-            const res = await API.get(`elasticsearch/get_data/`);
+            const res = await API.get(`elasticsearch/get_data/?user_id=${user?.id}`);
             setSearchArticles(res.data);
         
             toast.success('Article loaded successfully!', {
@@ -150,24 +149,28 @@ const Home = () => {
                         />
                     </div>}
                     {
-                        isLoading
-                        ?
-                        <div className='w-full flex-1 items-center justify-center flex p-20'>
-                            <Spinner />
-                        </div>
-                        :
-                        searchArticles.length>0
-                        ?
-                        <div className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:grid-cols-3 gap-2">
-                            {searchArticles.map((article, index) => (
-                                <Article key={index} {...article} index={index} />
-                            ))}
-                        </div>
-                        :
-                        <h5 className='text-center font-bold text-4xl sm:text-7xl w-full py-24'>No articles founded</h5>
+                        user &&
+                        <>
+                            {
+                                isLoading
+                                ?
+                                <div className='w-full flex-1 items-center justify-center flex p-20'>
+                                    <Spinner />
+                                </div>
+                                :
+                                searchArticles.length>0
+                                ?
+                                <div className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:grid-cols-3 gap-x-2 gap-y-8">
+                                    {searchArticles.map((article, index) => (
+                                        <Article key={index} {...article} index={index} />
+                                    ))}
+                                </div>
+                                :
+                                <h5 className='text-center font-bold text-4xl sm:text-7xl w-full py-24'>No articles founded</h5>
+                            }
+                        </>
                     }
                     {!user && <WhyUs />}
-                    {/* <ArticlesList articles={articles} /> */}
                     <Informations />
                 </div>
             </div>

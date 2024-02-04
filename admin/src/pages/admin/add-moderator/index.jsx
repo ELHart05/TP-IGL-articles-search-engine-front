@@ -5,6 +5,7 @@ import API from '../../../utils/api-client'
 import { toast } from 'react-toastify';
 import Spinner from 'react-spinner-material';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './style.css'
 
 const AddModerator = () => {
@@ -18,6 +19,7 @@ const AddModerator = () => {
         }
     })
     const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
 
     const onSubmit = async (data) => {
         try {
@@ -35,6 +37,7 @@ const AddModerator = () => {
                     draggable: true,
                     theme: "light",
                 })
+                navigate('/admin/gerer-moderator');
             } else {
                 toast.error('Failed to add moderator!', {
                     position: "top-center",

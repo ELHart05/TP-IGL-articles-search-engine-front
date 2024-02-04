@@ -5,12 +5,14 @@ import Input from '../../../components/common/Input'
 import { useEffect, useState } from 'react'
 import API from '../../../utils/api-client'
 import { toast } from 'react-toastify';
+import Spinner from 'react-spinner-material'
 import './style.css'
 
 const ArticleView = ({ article }) => {
 
     const navigate = useNavigate();
-    console.log(article.references)
+    const [isLoading, setIsLoading] = useState(false);
+    const [isApproveLoading, setIsApproveLoading] = useState(false);
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
             title: article?.title,
@@ -23,16 +25,20 @@ const ArticleView = ({ article }) => {
         }
     })
 
-    const onSubmit = (data) => {
+    const onSubmit = async (data) => {
         const req = {
             ...data,
-            authors: authors.trim().split(','),
-            institutions: institutions.trim().split(','),
-            keywords: keywords.trim().split(','),
-            refrences: refrences.trim().split(';'),
+            authors: data.authors.trim().split(','),
+            institutions: data.institutions.trim().split(','),
+            keywords: data.keywords.trim().split(','),
+            references: data.references.trim().split(';'),
         }
         try {
-            toast.success('Article updated', {
+            setIsLoading(true);
+            const res = await API.put(`elasticsearch/update_article/${article?.id}/`, {
+                ...req
+            });
+            toast.success(res?.data?.message, {
                 position: "top-center",
                 autoClose: 5000,
                 pauseOnHover: true,
@@ -48,27 +54,43 @@ const ArticleView = ({ article }) => {
                 draggable: true,
                 theme: "light",
             })
+        } finally {
+            setIsLoading(false)
         }
     }
 
-    const onApprove = (data) => {
+    const onApprove = async () => {
         try {
-            toast.success('Article Approved', {
-                position: "top-center",
-                autoClose: 5000,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-            })
-            navigate('/moderator/gerer-article');
+            setIsApproveLoading(true);
+            const res = await API.post(`paperhub/moderator/approve_article/${article?.id}/`);
+            if (res.status === 200) {
+                toast.success(res?.data?.detail, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+                navigate('/moderator/gerer-article');
+            } else {
+                toast.error(res?.response?.data?.detail, {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+            }
         } catch (error) {
-            toast.error(error?.response?.data?.detail ?? 'Error', {
+            toast.error(error?.response?.data?.detail ?? 'Error when approving the article', {
                 position: "top-center",
                 autoClose: 5000,
                 pauseOnHover: true,
                 draggable: true,
                 theme: "light",
             })
+        } finally {
+            setIsApproveLoading(false);
         }
     }
 
@@ -147,10 +169,10 @@ const ArticleView = ({ article }) => {
                 />
                 <div className='flex gap-x-4 gap-y-1 items-center flex-wrap'>
                     <Link to='/moderator/gerer-article' className='mt-3 shadow-lg bg-Pred hover:bg-[#800030] transition-all text-white rounded-2xl px-4 pt-2 pb-3 font-bold text-lg'>Annuler</Link>
-                    <button onClick={handleSubmit(onSubmit)} className='mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl px-4 pt-2 pb-3 font-bold text-lg'>Appliquer changment</button>
-                    <button onClick={handleSubmit(onApprove)} className='mt-3 shadow-lg bg-[#252A3A] hover:bg-[#252A3D] transition-all text-white rounded-2xl px-4 pt-2 pb-3 font-bold text-lg'>Approver article</button>
+                    <button type='submit' onClick={handleSubmit(onSubmit)} className='flex items-center justify-center mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl px-8 pt-2 pb-3 font-bold text-lg min-w-[248px]' disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Appliquer changment'}</button>
                 </div>
             </form>
+            {!article?.approved && <button type='button' onClick={onApprove} className='flex items-center w-fit justify-center mt-3 shadow-lg bg-[#252A3A] hover:bg-[#252A3D] transition-all text-white rounded-2xl px-4 pt-2 pb-3 font-bold text-lg min-w-[170px]' disabled={isApproveLoading}>{isApproveLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Approver article'}</button>}
         </>
     )
 }
@@ -166,11 +188,10 @@ const UpdateArticle = () => {
             try {
                 setIsLoading(true);
     
-                const res = await API.get(`elasticsearch/get_article_id/${id}/`)
-                console.log(res.data)
+                const res = await API.get(`elasticsearch/get_articles_mod_id/${id}/`)
                 setArticle(res.data)
     
-                toast.success('Account updated successfully', {
+                toast.success('Article founded successfully', {
                     position: "top-center",
                     autoClose: 5000,
                     pauseOnHover: true,

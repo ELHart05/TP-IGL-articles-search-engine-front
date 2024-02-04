@@ -7,6 +7,7 @@ import API from '../../utils/api-client';
 import { toast } from 'react-toastify';
 import './style.css';
 import Cookies from 'js-cookie';
+import isValidUser from '../../utils/isValidUser';
 
 const guesstNavItems = [
     {
@@ -115,7 +116,7 @@ const Navbar = ({ accessToken, user }) => {
         <header className='relative flex px-6 2sm:px-12 py-6 items-center justify-between border-b-2 border-green'>
             <div className='font-bold relative z-50'>
                 <Link to="/" className='logo'>
-                    PapersHub
+                    <img src='/logo.svg' alt='logo' />
                 </Link>
             </div>
             <div className={`z-40 bg-white border-green border-r-2 2sm:border-0 max-w-[270px] min-h-screen 2sm:min-h-0 2sm:w-auto 2sm:min-w-0 w-[80%] 2sm:contents flex flex-col justify-center 2sm:flex-row fixed top-0 2sm:static transition-all ${(navbarOpen) ? '-left-96' : 'left-0'}`}>
@@ -126,7 +127,12 @@ const Navbar = ({ accessToken, user }) => {
                             ?
                             <>
                                 {
-                                    loggedInNavItems.map(({ name, link }, index) => (
+                                    (!user?.is_superuser || !user?.is_staff)
+                                    ?
+                                    loggedInNavItems
+                                    :
+                                    loggedInNavItems.slice(0, -1)
+                                    .map(({ name, link }, index) => (
                                         <li key={index}>
                                             <Link className={`cursor-pointer capitalize transition-all ${(index == activeLink) ? 'text-main' : 'text-dark-gray hover:text-main'}`} to={link}>{name}</Link>
                                         </li>

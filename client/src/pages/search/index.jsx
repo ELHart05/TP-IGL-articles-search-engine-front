@@ -6,8 +6,11 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import API from '../../utils/api-client';
 import Spinner from 'react-spinner-material';
+import isValidUser from "../../utils/isValidUser";
 
 const Search = () => {
+
+    const { user } = isValidUser();
     const [isLoading, setIsLoading] = useState(false);
     const [articles, setArticles] = useState([]);
     const [searchArticles, setSearchArticles] = useState([]);
@@ -21,7 +24,7 @@ const Search = () => {
     useEffect(() => {
         const getAllArticles = async () => {
         try {
-            const res = await API.get(`elasticsearch/get_data/`);
+            const res = await API.get(`elasticsearch/get_data/?user_id=${user?.id}`);
             setSearchArticles(res.data);
         
             toast.success('Article loaded successfully!', {
@@ -143,7 +146,7 @@ const Search = () => {
                     :
                     searchArticles.length>0
                     ?
-                    <div className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:grid-cols-3 gap-2">
+                    <div className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:grid-cols-3 gap-x-2 gap-y-8">
                         {searchArticles.map((article, index) => (
                             <Article key={index} {...article} index={index} />
                         ))}

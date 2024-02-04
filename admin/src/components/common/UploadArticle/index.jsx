@@ -38,7 +38,6 @@ const UploadArticle = () => {
     const onSubmit = async ({ uploadValue }) => {
         try {
             setIsLoading(true)
-            console.log(uploadValue)
             const response = await API.get(`/elasticsearch/drive/${uploadValue}/`);
             if (response.status === 200) {
                 toast.success('Article uploaded successfully', {
@@ -74,7 +73,7 @@ const UploadArticle = () => {
         <form onSubmit={handleSubmit(onSubmit)} className='bg-white flex items-center justify-between gap-4 px-4 md:px-8 py-3 rounded-xl flex-wrap'>
             <label htmlFor="uploader" className='text-center shadow-lg cursor-pointer bg-Pgreen text-white rounded-xl px-4 pb-2 pt-1 font-bold text-md'>Uploader des articles</label>
             <UploadInput register={uploadRegister} />
-            <button className='flex items-center justify-center text-center shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl px-8 pb-2 pt-1 font-bold text-md' disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Upload'}</button>
+            <button className='flex items-center justify-center text-center shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl px-8 pb-2 pt-1 font-bold text-md' disabled={isLoading}>{isLoading ? <Spinner style={{height: "23px", width: "23px"}} color='white' /> : 'Upload'}</button>
         </form>
     )
 }

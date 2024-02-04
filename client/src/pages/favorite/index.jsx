@@ -1,4 +1,3 @@
-import ArticlesList from '../../components/Home/ArticlesList'
 import Layout from '../../components/Layout'
 import WelcomeUser from '../../components/WelcomeUser'
 import Article from '../../components/search/Article'
@@ -17,10 +16,10 @@ const Favorite = () => {
     useEffect(() => {
         const getFavoriteArticles = async () => {
             try {
-                const res = await API.get(`elasticsearch/get_favorites/${user.id}/`);
-                setArticles(res.data);
+                const res = await API.get(`elasticsearch/get_favorites/${user?.id}/`);
+                setArticles(res?.data?.favorite_articles);
             } catch (error) {
-                toast.error(error?.response?.data?.error ?? 'Error', {
+                toast.error(error?.response?.data?.error ?? 'Error while fetching favorite articles', {
                     position: "top-center",
                     autoClose: 5000,
                     pauseOnHover: true,
@@ -34,51 +33,6 @@ const Favorite = () => {
 
         getFavoriteArticles();
     }, [])
-
-    // const articles = [
-    //     {
-    //         head: "Resume1",
-    //         paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
-    //         title: "Title",
-    //         favorite: false,
-    //         id: "1"
-    //     },
-    //     {
-    //         head: "Resume2",
-    //         paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
-    //         title: "Title",
-    //         favorite: true,
-    //         id: "2"
-    //     },
-    //     {
-    //         head: "Resume3",
-    //         paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
-    //         title: "Title",
-    //         favorite: true,
-    //         id: "3"
-    //     },
-    //     {
-    //         head: "Resume1",
-    //         paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
-    //         title: "Title",
-    //         favorite: true,
-    //         id: "1"
-    //     },
-    //     {
-    //         head: "Resume2",
-    //         paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
-    //         title: "Title",
-    //         favorite: true,
-    //         id: "2"
-    //     },
-    //     {
-    //         head: "Resume3",
-    //         paragraph: "The recent Tailwind CSS update presents a comprehensive set of enhancements. Among the notable improvements are revamped utility classes, offering a wider array of options for developers seeking versatile styling solutions. Performance optimizations stand out as a pivotal focus, streamlining the framework's codebase to enable faster loading times and smoother rendering. Additionally, this update introduces new configuration possibilities, allowing for a more tailored approach to project-specific requirements. Addressing reported bugs and stability issues, the update aims to fortify the framework's reliability. Accompanying these changes is a...",
-    //         title: "Title",
-    //         favorite: true,
-    //         id: "3"
-    //     },
-    // ]
 
     return (
         <Layout isLoading={isLoading}>
@@ -95,7 +49,6 @@ const Favorite = () => {
                     :
                     <h5 className='text-center font-bold text-7xl w-full py-24'>No articles saved</h5>
                 }
-                {/* <ArticlesList articles={articles} /> */}
             </div>
         </Layout>
     )

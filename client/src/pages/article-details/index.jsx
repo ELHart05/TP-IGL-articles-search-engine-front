@@ -52,7 +52,7 @@ const Refrence = ({ name }) => {
 const ArticleDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { id } = useParams();
-  const user = isValidUser();
+  const { user } = isValidUser();
   const navigate = useNavigate();
   const [article, setArticle] = useState(null)
 
@@ -60,7 +60,6 @@ const ArticleDetails = () => {
     const getArticleDetails = async () => {
       try {
         const res = await API.get(`elasticsearch/get_article_id/${id}/`);
-        console.log(res.data)
         setArticle(res.data);
 
         toast.success('Article loaded successfully!', {
@@ -89,8 +88,8 @@ const ArticleDetails = () => {
   const [isFavoriteLoading, setIsFavoriteLoading] = useState(false);
   const addToFavorite = async () => {
     try {
-      setIsFavoriteLoading(true)
 
+        setIsFavoriteLoading(true)
         await API.post(`paperhub/user/favorite/${user.id}/${id}/`)
     
         toast.success('Added to favorite!', {
@@ -168,7 +167,7 @@ const ArticleDetails = () => {
             <h6 className='font-bold text-lg ml-4'>Refrences:</h6>
             <div className='flex mt-4 gap-10 overflow-x-scroll md:px-6 w-full pb-3 scrollbar-hide'>
               {
-                article?.refrences.map((reference, index) => (
+                article?.references.map((reference, index) => (
                   <Refrence name={reference} key={index} />
                 ))
               }
@@ -184,15 +183,19 @@ const ArticleDetails = () => {
               <img src="/images/download.svg" alt="Download" />
               PDF version
             </Link>
-            <div className='cursor-pointer transition-all flex hover:translate-y-1' onClick={addToFavorite}>
-              {
-                isFavoriteLoading
-                ?
-                <Spinner style={{height: '24px', width: '24px'}} />
-                :
-                <img className='h-10 w-10' src="/images/Home/ArticlesList/favorite-off.svg" alt="Heart" />
-              }
-            </div>
+            {
+              (!user?.is_superuser || !user?.is_staff)
+              &&
+              <div className='cursor-pointer transition-all flex hover:translate-y-1' onClick={addToFavorite}>
+                {
+                  isFavoriteLoading
+                  ?
+                  <Spinner style={{height: '24px', width: '24px'}} />
+                  :
+                  <img className='h-10 w-10' src="/images/Home/ArticlesList/favorite-off.svg" alt="Heart" />
+                }
+              </div>
+            }
           </div>
         </div>
       </div>

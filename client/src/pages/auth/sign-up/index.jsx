@@ -63,9 +63,11 @@ const SignUp = () => {
 
             const { access_token, refresh_token, user } = res.data;
 
+            const userData = { ...user, is_superuser: false, is_staff: false }
+
             Cookies.set('PHaccessToken', access_token);
             Cookies.set('PHrefreshToken', refresh_token);
-            Cookies.set('PHuser', JSON.stringify(user));
+            Cookies.set('PHuser', JSON.stringify(userData));
 
             navigate('/profile');
 
