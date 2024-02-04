@@ -82,11 +82,9 @@ const Navbar = ({ accessToken, user }) => {
 
     const handleSignOut = async () => {
         try {
-            const res = await API.post('auth/logout/', {
+            await API.post('auth/logout/', {
                 refresh_token: Cookies.get('PHrefreshToken')
             });
-
-            console.log(res)
 
             Cookies.remove('PHuser');
             Cookies.remove('PHrefreshToken');
@@ -151,7 +149,7 @@ const Navbar = ({ accessToken, user }) => {
                 {
                     !!accessToken &&
                     <div className='2sm:mt-0 mt-6 flex gap-6 2sm:gap-4 items-center flex-col 2sm:flex-row'>
-                        <button onClick={() => {setProfileInfoOpen((prev) => !prev); navbarOpen && setNavbarOpen(false)}} className='transition-all font-bold rounded-full p-1 bg-black text-white'>
+                        <button onClick={() => {setProfileInfoOpen((prev) => !prev); navbarOpen && setNavbarOpen(false)}} className='aspect-square transition-all font-bold rounded-full p-1 bg-black text-white'>
                             {user.username.slice(0, 2).toUpperCase()}
                         </button>
                     </div>

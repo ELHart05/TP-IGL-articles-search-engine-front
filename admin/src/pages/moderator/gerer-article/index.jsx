@@ -1,26 +1,37 @@
 import { Link } from 'react-router-dom'
-import axios from "axios"
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import LayoutMod from '../../../components/mod/LayoutMod'
-import './style.css'
 import API from '../../../utils/api-client'
+import { toast } from 'react-toastify';
+import './style.css'
 
 const ArticleItem = ({ articles,setArticles,index, id, title, approved }) => {
 
     const deleteArticle = async (id) => {
         try {
-          const response = await API.get(`/elasticsearch/delete_article/${id}/`);
-          console.log(response.data.message);
-    
-          // If the deletion was successful, update the articles state
-          if (response.status === 200) {
-            const updatedArticles = articles.filter(article => article.id !== id);
-            setArticles(updatedArticles);
-          }
+            const response = await API.get(`/elasticsearch/delete_article/${id}/`);
+            // If the deletion was successful, update the articles state
+            if (response.status === 200) {
+                const updatedArticles = articles.filter(article => article.id !== id);
+                setArticles(updatedArticles);
+                toast.success('Article delete successfully!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+            }
         } catch (error) {
-          console.error('Error deleting article:', error.message);
+            toast.error('Something went wrong, try again!', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
         }
-      };
+    };
 
     return (
         <div className='w-full border-2 border-black rounded-xl px-4 py-3 gap-x-4 gap-y-2 flex items-center justify-between flex-wrap-reverse'>
@@ -48,40 +59,47 @@ const ArticleItem = ({ articles,setArticles,index, id, title, approved }) => {
     )
 }
 
-export let articlesList = []
-
 const GererArticle = () => {
 
     const [isLoading, setIsLoading] = useState(true);
     const [articles, setArticles] = useState([]);
-    // setInterval(() => {
-    //     setIsLoading(false)
-    // }, 5000)
-    //this is just an example of loading
 
     useEffect(() => {
         const fetchData = async () => {
-          try {
-            const response = await API.get("/elasticsearch/get_articles_mod/");
-            const data = response.data;
-            setArticles(data);
-            articlesList = data
-            setIsLoading(false);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-            setIsLoading(false);
-          }
+            try {
+                const response = await API.get("/elasticsearch/get_articles_mod/");
+                const data = response.data;
+                setArticles(data);
+                toast.success('Articles loaded!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+                articlesList = data;
+            } catch (error) {
+                toast.error('Something went wrong, try again!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+            } finally {
+                setIsLoading(false);
+            }
         };
     
         fetchData();
-      }, []); 
+    }, []); 
 
     return (
-        <LayoutMod isLoading={false ?? isLoading}>
+        <LayoutMod isLoading={isLoading}>
             <div className='flex items-center justify-center mt-2 gap-4'>
-                <div className='cursor-pointer h-10 w-10'>
+                {/* <div className='cursor-pointer h-10 w-10'>
                     <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
-                </div>
+                </div> */}
                 <div className='w-full gap-4 grid grid-cols-1'>
                     {articles.map(({ id, title, approved }, index) => (
                         <ArticleItem
@@ -95,9 +113,9 @@ const GererArticle = () => {
                         />
                     ))}
                 </div>
-                <div className='cursor-pointer h-10 w-10 rotate-180'>
+                {/* <div className='cursor-pointer h-10 w-10 rotate-180'>
                     <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
-                </div>
+                </div> */}
             </div>
         </LayoutMod>
     )

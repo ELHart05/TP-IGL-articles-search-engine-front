@@ -1,24 +1,34 @@
 import { useForm } from 'react-hook-form'
 import AuthInput from '../../../components/auth/sign-in/AuthInput'
 import './style.css'
+import { useNavigate } from 'react-router-dom'
+import Spinner from 'react-spinner-material'
+import { toast } from 'react-toastify';
+import { useState } from 'react';
+import API from '../../../utils/api-client'
+import Cookies from 'js-cookie'
+
 
 const SignIn = () => {
 
+    const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
+
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
-            email: '',
+            username: '',
             password: ''
         }
     })
     
-    const emailRegister = register('email', {
+    const usernameRegister = register('username', {
         required: {
             value: true,
-            message: 'Email is required to proceed'
+            message: 'Username is required to proceed'
         },
-        pattern: {
-            value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-            message: 'Please respect email format'
+        minLength: {
+            value: 3,
+            message: 'Username must be at least 3 charachters'
         }
     })
 
@@ -33,9 +43,43 @@ const SignIn = () => {
         }
     })
 
-    const onSubmit = (data) => {
-        console.log(data)
-        //todo: add auth logic
+    const onSubmit = async (data) => {
+        try {
+            setIsLoading(true);
+            const res = await API.post('auth/token/', {
+                ...data,
+            })
+
+            const { access, refresh, ...userData } = res.data;
+
+            Cookies.set('PHuser', JSON.stringify(userData));
+            Cookies.set('PHrefreshToken', refresh);
+            Cookies.set('PHaccessToken', access);
+
+            toast.success('Welcome back', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+            if (userData?.is_superuser) {
+                return navigate('/admin/profile');
+            } else {
+                return navigate('/moderator/profile');
+            }
+
+        } catch (error) {
+            toast.error(error?.response?.data?.detail ?? 'Error', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+        } finally {
+            setIsLoading(false);
+        }
     }
 
     return (
@@ -47,10 +91,10 @@ const SignIn = () => {
                 <form onSubmit={handleSubmit(onSubmit)} className="w-full flex flex-col gap-4 items-center max-w-[650px]">
                     <h1 className='text-3xl font-bold mb-10 text-center'>Welcome to <span className='text-Pred'>PapersHub</span> Admin</h1>
                     <div className='flex flex-col gap-10 w-full'>
-                        <AuthInput register={emailRegister} attribute='email' errors={errors} />
+                        <AuthInput register={usernameRegister} attribute='username' errors={errors} />
                         <AuthInput register={passwordRegister} attribute='password' errors={errors} />
                     </div>
-                    <button className='mt-12 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl w-full px-4 py-4 font-bold text-lg max-w-full'>SignIn</button>
+                    <button className='flex items-center justify-center mt-12 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl w-full px-4 py-4 font-bold text-lg max-w-full' disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'SignIn'}</button>
                     <div className='mt-4'>
                         <p className='font-bold text-lg text-center'>Foget password? <span className='text-Pred cursor-pointer hover:underline'>Send link now!</span></p>
                     </div>

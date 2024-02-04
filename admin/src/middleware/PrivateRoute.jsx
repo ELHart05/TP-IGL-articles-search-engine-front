@@ -3,7 +3,10 @@ import { useNavigate } from "react-router-dom";
 import isValidUser from '../utils/isValidUser';
 
 const userHasRequiredRoles = (user, requiredRoles) => {
-    return user && requiredRoles.includes(user.role);
+    return requiredRoles.some(role => 
+        (role === 'moderator' && user.is_staff) ||
+        (role === 'admin' && user.is_superuser)
+    );
 };
 
 const PrivateRoute = ({ element, requiredRoles }) => {

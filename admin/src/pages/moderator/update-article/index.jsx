@@ -1,40 +1,75 @@
-// import { useState } from 'react'
-import { Link, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { articlesList } from '../gerer-article'
 import LayoutMod from '../../../components/mod/LayoutMod'
 import Input from '../../../components/common/Input'
+import { useEffect, useState } from 'react'
+import API from '../../../utils/api-client'
+import { toast } from 'react-toastify';
 import './style.css'
 
-const ArticleView = ({ mod }) => {
+const ArticleView = ({ article }) => {
+
+    const navigate = useNavigate();
 
     const { handleSubmit, register, formState: { errors } } = useForm({
         defaultValues: {
-            title: '' ?? mod.title,
-            authors: '' ?? mod.authors.join(', '),
-            institutions: '' ?? mod.institutions.join(', '),
-            keywords: '' ?? mod.keywords.join(', '),
-            abstract: '' ?? mod.abstract,
-            text: '' ?? mod.text,
-            references: '' ?? mod.references.join('; '),
+            title: article?.title,
+            authors: article?.authors.join(', '),
+            institutions: article?.institutions.join(', '),
+            keywords: article?.keywords.join(', '),
+            content: article?.content,
+            resume: article?.resume,
+            refrences: article?.refrences.join('; '),
         }
     })
 
     const onSubmit = (data) => {
-        //TODO/ handle update article logic
         const req = {
             ...data,
             authors: authors.trim().split(','),
             institutions: institutions.trim().split(','),
             keywords: keywords.trim().split(','),
-            references: references.trim().split(';'),
+            refrences: refrences.trim().split(';'),
         }
-        console.log(req)
+        try {
+            toast.success('Article updated', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+            navigate('/moderator/gerer-article');
+        } catch (error) {
+            toast.error(error?.response?.data?.detail ?? 'Error', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+        }
     }
 
     const onApprove = (data) => {
-        //TODO/ handle approve article logic
-        console.log(data)
+        try {
+            toast.success('Article Approved', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+            navigate('/moderator/gerer-article');
+        } catch (error) {
+            toast.error(error?.response?.data?.detail ?? 'Error', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+        }
     }
 
     const titleRegister = register('title', {
@@ -88,26 +123,26 @@ const ArticleView = ({ mod }) => {
                     errors={errors}
                 />
                 <Input
-                    labelTitle={"Abstract"}
+                    labelTitle={"Resume"}
                     placeholder={'Eg: Lorem ipsum dolor sit amet consectetur...'}
-                    attribute={'abstract'}
-                    register={commaSeparatedRegister('abstract')}
+                    attribute={'resume'}
+                    register={commaSeparatedRegister('resume')}
                     errors={errors}
                     textArea={true}
                 />
                 <Input
-                    labelTitle={"Text"}
+                    labelTitle={"Content"}
                     placeholder={'Eg: lougga ipsum dolor sit amet consectetur...'}
-                    attribute={'text'}
-                    register={commaSeparatedRegister('text')}
+                    attribute={'content'}
+                    register={commaSeparatedRegister('content')}
                     errors={errors}
                     textArea={true}
                 />
                 <Input
-                    labelTitle={"References"}
+                    labelTitle={"Refrences"}
                     placeholder={'Eg: CEUR Workshop Proceedings, 2017; UML; Mr BATATA Course 2024 (separate with ";")'}
-                    attribute={'references'}
-                    register={commaSeparatedRegister('references')}
+                    attribute={'refrences'}
+                    register={commaSeparatedRegister('refrences')}
                     errors={errors}
                 />
                 <div className='flex gap-x-4 gap-y-1 items-center flex-wrap'>
@@ -123,19 +158,44 @@ const ArticleView = ({ mod }) => {
 const UpdateArticle = () => {
     
     const { id } = useParams();
-    // const [isLoading, setIsLoading] = useState(false);
-    // setInterval(() => {
-    //     setIsLoading(false)
-    // }, 5000)
-    //this is just an example of loading
+    const [isLoading, setIsLoading] = useState(true);
+    const [article, setArticle] = useState(null);
 
-    const mod = articlesList.find((mod) => (
-        mod.id == id
-    ));
+    useEffect(() => {
+        const currentArticle = async () => {            
+            try {
+                setIsLoading(true);
+    
+                const res = await API.get(`elasticsearch/get_article_id/${id}/`)
+
+                setArticle(res.data)
+    
+                toast.success('Account updated successfully', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+            } catch (error) {
+                toast.error(error?.response?.data?.detail ?? 'Error', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
+            } finally {
+                setIsLoading(false);
+            }
+        }
+
+        currentArticle()
+    }, [])
 
     return (
-        <LayoutMod isLoading={false ?? isLoading}>
-            <ArticleView mod={mod} />
+        <LayoutMod isLoading={isLoading}>
+            <ArticleView article={article} />
         </LayoutMod>
     )
 }

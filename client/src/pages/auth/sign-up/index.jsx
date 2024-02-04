@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import AuthInput from '../../../components/auth/AuthInput'
@@ -49,8 +49,8 @@ const SignUp = () => {
             message: 'Password is required to proceed'
         },
         minLength: {
-            value: 4,
-            message: 'Passwords are more than 4 characters'
+            value: 3,
+            message: 'Passwords are more than 3 characters'
         }
     })
 
@@ -103,7 +103,7 @@ const SignUp = () => {
                         <AuthInput register={emailRegister} attribute='email' errors={errors} />
                         <AuthInput register={passwordRegister} attribute='password' errors={errors} />
                     </div>
-                    <button className='mt-12 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl w-full px-4 py-4 font-bold text-lg max-w-full flex items-center justify-center'>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'SignUp'}</button>
+                    <button className='mt-12 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl w-full px-4 py-4 font-bold text-lg max-w-full flex items-center justify-center' disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'SignUp'}</button>
                     <div className='mt-4'>
                         <p className='font-bold text-lg text-center'>Already have an account? <Link to='/auth/sign-in' className='text-Pred cursor-pointer hover:underline'>SignIn!</Link></p>
                     </div>

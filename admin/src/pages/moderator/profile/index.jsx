@@ -2,14 +2,30 @@ import { useForm } from 'react-hook-form'
 import LayoutMod from '../../../components/mod/LayoutMod'
 import Input from '../../../components/common/Input'
 import API from '../../../utils/api-client'
+import isValidUser from '../../../utils/isValidUser'
+import Spinner from 'react-spinner-material'
+import { useEffect, useState } from 'react'
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom'
+import Cookies from 'js-cookie'
 import './style.css'
 
 const ProfileMod = () => {
 
+    const { user } = isValidUser();
+    const [isLoading, setIsLoading] = useState(false);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (user?.is_superuser) {
+            navigate('/admin/profile');
+        }
+    }, [])
+
     const { handleSubmit, register, formState: { errors }, watch } = useForm({
         defaultValues: {
-            modName: '',
-            email: '',
+            modName: user?.username,
+            email: user?.email,
             password: '',
             confirmPassword: ''
         }
@@ -17,29 +33,48 @@ const ProfileMod = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await API.put(`/paperhub/moderator/update_moderator/${userId}`, {
+            setIsLoading(true);
+
+            const { confirmPassword, ...userData} = data;
+
+            const response = await API.put(`paperhub/user/update-user/${user?.id}/`, {
                 user: {
-                    username: data.modName,
-                    email: data.email, 
-                    password: data.password,
+                    ...userData
                 },
             });
 
             if (response.status === 200) {
-                console.log('Profile updated successfully');
+                Cookies.set('PHuser', JSON.stringify({
+                    ...JSON.parse(Cookies.get('PHuser')),
+                    username: userData.username,
+                    email: userData.email
+                }))
+                toast.success('Profile updated successfully', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             } else {
-                const errorData = await response.json();
-                console.error('Error updating profile:', errorData);
+                toast.error('Error while updating the Profile', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             }
         } catch (error) {
-            console.error('Error updating profile:', error.message);
-            toast({
-                status: 'error',
-                title: 'Error fetching data',
-                description: 'Something went error, please try again!',
-                duration: 6000,
-                isClosable: true
+            toast.error('Error, try again!', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
             })
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -55,10 +90,6 @@ const ProfileMod = () => {
     })
 
     const passwordRegister = register('password', {
-        required: {
-            value: true,
-            message: 'Password is required to proceed'
-        },
         validate: (value) => {
             return value === watch('password') || 'Passwords do not match';
         }
@@ -102,7 +133,7 @@ const ProfileMod = () => {
                     register={passwordCofirmRegister}
                     errors={errors}
                 />
-                <button className='mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl w-full px-4 pt-2 pb-3 font-bold text-lg max-w-full'>Appliquer changment</button>
+                <button className='flex items-center justify-center mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl w-full px-4 pt-2 pb-3 font-bold text-lg max-w-full'disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Appliquer changment'}</button>
             </form>
         </LayoutMod>
     )

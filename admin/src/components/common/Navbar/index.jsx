@@ -1,15 +1,42 @@
 import { useNavigate } from 'react-router-dom'
 import Cookies from 'js-cookie'
+import { toast } from 'react-toastify';
+import API from '../../../utils/api-client';
 import './style.css'
 
 const Navbar = () => {
 
     const navigate = useNavigate();
 
-    const handleLogout = () => {
-        Cookies.remove('PHaccessToken');
-        Cookies.remove('PHuser');
-        navigate('/auth/sign-in');
+    const handleLogout = async () => {
+        try {
+            await API.post('auth/logout/', {
+                refresh_token: Cookies.get('PHrefreshToken')
+            });
+
+            Cookies.remove('PHuser');
+            Cookies.remove('PHrefreshToken');
+            Cookies.remove('PHaccessToken');
+
+            toast.success('Good bye', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+
+            navigate('/auth/sign-in');
+
+        } catch (error) {
+            toast.error('Error', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+        }
     }
 
     return (

@@ -14,6 +14,7 @@ import GererArticle from "./pages/moderator/gerer-article";
 import UpdateArticle from "./pages/moderator/update-article";
 
 import Error from './pages/error'
+import Unauthorized from "./pages/unauthorized";
 
 function App() {
   return (
@@ -23,18 +24,19 @@ function App() {
           <Route path="sign-in" element={<SignIn />} />
         </Route>
         <Route path="/admin/">
-          <Route path="profile" element={<ProfileAdmin />} />
-          <Route path="add-moderator" element={<AddModerator />} />
-          <Route path="gerer-moderator" element={<GererModerator />} />
-          <Route path="gerer-moderator/:id" element={<UpdateModerator />} />
+          <Route path="profile" element={<PrivateRoute element={<ProfileAdmin />} requiredRoles={['admin']} />} />
+          <Route path="add-moderator" element={<PrivateRoute element={<AddModerator />} requiredRoles={['admin']} />} />
+          <Route path="gerer-moderator" element={<PrivateRoute element={<GererModerator />} requiredRoles={['admin']} />} />
+          <Route path="gerer-moderator/:id" element={<PrivateRoute element={<UpdateModerator />} requiredRoles={['admin']} />} />
           <Route path="*" element={(<Navigate to={'profile'} />)} />
         </Route>
-        <Route path="/moderator/" >
-          <Route path="profile" element={<ProfileMod />} />
-          <Route path="gerer-article" element={<GererArticle />} />
-          <Route path="gerer-article/:id" element={<UpdateArticle />} />
+        <Route path="/moderator/">
+          <Route path="profile" element={<PrivateRoute element={<ProfileMod />} requiredRoles={['moderator']} />} />
+          <Route path="gerer-article" element={<PrivateRoute element={<GererArticle />} requiredRoles={['moderator']} />} />
+          <Route path="gerer-article/:id" element={<PrivateRoute element={<UpdateArticle />} requiredRoles={['moderator']} />} />
           <Route path="*" element={(<Navigate to={'profile'} />)} />
         </Route>
+        <Route path="/unauthorized" element={<Unauthorized />} />
         <Route path="*" element={<Error />} />
       </Routes>
     </div>

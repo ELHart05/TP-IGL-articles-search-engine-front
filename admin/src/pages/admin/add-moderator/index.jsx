@@ -2,6 +2,9 @@ import { useForm } from 'react-hook-form'
 import LayoutAdmin from '../../../components/admin/LayoutAdmin'
 import Input from '../../../components/common/Input'
 import API from '../../../utils/api-client'
+import { toast } from 'react-toastify';
+import Spinner from 'react-spinner-material';
+import { useState } from 'react';
 import './style.css'
 
 const AddModerator = () => {
@@ -14,21 +17,43 @@ const AddModerator = () => {
             confirmPassword: ''
         }
     })
+    const [isLoading, setIsLoading] = useState(false);
 
     const onSubmit = async (data) => {
         try {
+            setIsLoading(true)
             const response = await API.post('/paperhub/moderator/add-moderator/', {
                 modName: data.modName,
                 email: data.email,
                 password: data.password,
             });
             if (response.status === 200) {
-                console.log('Moderator added successfully');
+                toast.success('Moderator added successfully!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             } else {
-                console.error('Failed to add moderator');
+                toast.error('Failed to add moderator!', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             }
         } catch (error) {
-            console.error('Error adding moderator:', error);
+            toast.error('Something went wrong, try again!', {
+                position: "top-center",
+                autoClose: 5000,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            })
+        } finally {
+            setIsLoading(false)
         }
     }
 
@@ -91,7 +116,7 @@ const AddModerator = () => {
                     register={passwordCofirmRegister}
                     errors={errors}
                 />
-                <button className='mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl w-full px-4 pt-2 pb-3 font-bold text-lg max-w-full'>Ajouter modérateur</button>
+                <button className='flex items-center justify-center mt-3 shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-2xl w-full px-4 pt-2 pb-3 font-bold text-lg max-w-full' disabled={isLoading}>{isLoading ? <Spinner style={{height: "28px", width: "28px"}} color='white' /> : 'Ajouter modérateur'}</button>
             </form>
         </LayoutAdmin>
     )
