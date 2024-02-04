@@ -1,17 +1,25 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import AuthInput from '../../../components/auth/AuthInput'
 import Spinner from 'react-spinner-material'
 import API from '../../../utils/api-client'
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie'
+import isValidUser from '../../../utils/isValidUser'
 import './style.css'
 
 const SignIn = () => {
 
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+
+    const { isValidAuth } = isValidUser();
+    useEffect(() => {
+        if (isValidAuth) {
+            navigate('/profile')
+        }
+    }, [])
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {

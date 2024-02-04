@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import AuthInput from '../../../components/auth/AuthInput'
@@ -6,12 +6,20 @@ import API from '../../../utils/api-client'
 import Cookies from 'js-cookie'
 import Spinner from 'react-spinner-material'
 import { toast } from 'react-toastify';
+import isValidUser from '../../../utils/isValidUser'
 import './style.css'
 
 const SignUp = () => {
 
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+
+    const { isValidAuth } = isValidUser();
+    useEffect(() => {
+        if (isValidAuth) {
+            navigate('/profile')
+        }
+    }, [])
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {
@@ -65,13 +73,13 @@ const SignUp = () => {
 
             const userData = { ...user, is_superuser: false, is_staff: false }
 
+            Cookies.set('PHuser', JSON.stringify(userData));
             Cookies.set('PHaccessToken', access_token);
             Cookies.set('PHrefreshToken', refresh_token);
-            Cookies.set('PHuser', JSON.stringify(userData));
 
             navigate('/profile');
 
-            toast.success('Welcome back', {
+            toast.success('Welcome amoung us!', {
                 position: "top-center",
                 autoClose: 5000,
                 pauseOnHover: true,

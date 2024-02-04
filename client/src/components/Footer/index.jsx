@@ -75,7 +75,7 @@ const Footer = ({ accessToken, user }) => {
             <div className='flex flex-col gap-4 sm:gap-0 sm:flex-row items-center justify-between'>
                 <div className='text-xl font-bold relative z-50'>
                     <Link to="/" className='logo'>
-                        <img src="/logo.svg" alt="Logo" />
+                        PapersHub
                     </Link>
                 </div>
                 <div>

@@ -1,18 +1,30 @@
 import { useForm } from 'react-hook-form'
 import AuthInput from '../../../components/auth/sign-in/AuthInput'
-import './style.css'
 import { useNavigate } from 'react-router-dom'
 import Spinner from 'react-spinner-material'
 import { toast } from 'react-toastify';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import API from '../../../utils/api-client'
 import Cookies from 'js-cookie'
+import isValidUser from '../../../utils/isValidUser'
+import './style.css'
 
 
 const SignIn = () => {
 
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
+
+    const { isValidAuth } = isValidUser();
+    useEffect(() => {
+        if (isValidAuth) {
+            if (userData?.is_superuser) {
+                return navigate('/admin/profile');
+            } else {
+                return navigate('/moderator/profile');
+            }
+        }
+    }, [])
 
     const { register, handleSubmit, formState: { errors } } = useForm({
         defaultValues: {

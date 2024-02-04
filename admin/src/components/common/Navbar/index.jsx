@@ -41,9 +41,7 @@ const Navbar = () => {
 
     return (
         <div className='border-b-2 border-b-Pgreen py-3 flex items-center justify-between'>
-            <div className='font-second text-lg font-bold'>
-                <img src="/panel/logo.svg" alt="logo" />
-            </div>
+            <h3 className='font-second text-lg font-bold'>PapersHub</h3>
             <button onClick={handleLogout} className='shadow-lg bg-Pgreen hover:bg-[#004D50] transition-all text-white rounded-xl px-4 pb-2 pt-1 font-bold text-md'>Logout</button>
         </div>
     )
