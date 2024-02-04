@@ -74,9 +74,9 @@ const Home = () => {
 
             const res = await API.get(`elasticsearch/search/${search_query}/`)
             
-            setDataLength(res.data.length);
-            setArticles(res.data);
-            setSearchArticles(res.data);
+            setDataLength(res?.data?.length ?? 0);
+            setArticles(res?.data ?? []);
+            setSearchArticles(res?.data ?? []);
         
             toast.success('Search results are here!', {
                 position: "top-center",
@@ -158,7 +158,7 @@ const Home = () => {
                                     <Spinner />
                                 </div>
                                 :
-                                searchArticles.length>0
+                                !!searchArticles.length
                                 ?
                                 <div className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:grid-cols-3 gap-x-2 gap-y-8">
                                     {searchArticles.map((article, index) => (
