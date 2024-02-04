@@ -14,7 +14,7 @@ const PrivateRoute = ({ element, requiredRoles }) => {
     const { user, accessToken, isValidAuth } = isValidUser();
 
     useEffect(() => {
-        if (!isValidAuth) {
+        if (!isValidAuth || (!user.is_staff && !user.is_superuser)) {
             navigate('/auth/sign-in');
         } else if (requiredRoles && requiredRoles.length > 0 && !userHasRequiredRoles(user, requiredRoles)) {
             navigate('/unauthorized');

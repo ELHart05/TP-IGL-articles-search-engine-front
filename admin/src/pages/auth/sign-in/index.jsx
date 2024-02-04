@@ -15,12 +15,12 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
 
-    const { isValidAuth } = isValidUser();
+    const { isValidAuth, user } = isValidUser();
     useEffect(() => {
         if (isValidAuth) {
-            if (userData?.is_superuser) {
+            if (user?.is_superuser) {
                 return navigate('/admin/profile');
-            } else {
+            } else if (user?.is_staff) {
                 return navigate('/moderator/profile');
             }
         }

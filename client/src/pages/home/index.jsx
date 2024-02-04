@@ -28,30 +28,33 @@ const Home = () => {
 
     useEffect(() => {
         const getAllArticles = async () => {
-        if (!user) {
-            return;
-        }
-        try {
-            const res = await API.get(`elasticsearch/get_data/?user_id=${user?.id}`);
-            setSearchArticles(res.data);
-        
-            toast.success('Article loaded successfully!', {
-                position: "top-center",
-                autoClose: 5000,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-            })
+            if (!user) {
+                return;
+            }
+            try {
+                const res = await API.get(`elasticsearch/get_data/?user_id=${user?.id}`);
+                setSearchArticles(res?.data ?? []);
 
-        } catch (error) {
-                toast.error(error?.response?.data?.error ?? 'Error', {
+                if (res?.response?.data?.includes('index_not_found_exception')) {
+                    throw new Error('No articles added, contact admins to upload new ones!')
+                }
+            
+                toast.success('Article loaded successfully!', {
                     position: "top-center",
                     autoClose: 5000,
                     pauseOnHover: true,
                     draggable: true,
                     theme: "light",
                 })
-                navigate('/search')
+
+            } catch (error) {
+                toast.error(error?.response?.data?.error ?? error?.message ?? 'Error', {
+                    position: "top-center",
+                    autoClose: 5000,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                })
             } finally {
                 setIsLoading(false);
             }
@@ -80,6 +83,10 @@ const Home = () => {
             setDataLength(res?.data?.length ?? 0);
             setArticles(res?.data ?? []);
             setSearchArticles(res?.data ?? []);
+
+            if (res?.response?.data?.error?.includes('index_not_found_exception')) {
+                throw new Error('No articles added, contact admins to upload new ones!')
+            }
         
             toast.success('Search results are here!', {
                 position: "top-center",
@@ -90,7 +97,7 @@ const Home = () => {
             })
     
         } catch (error) {
-            toast.error('Something went wrong, try again!', {
+            toast.error(error?.message ?? 'Something went wrong, try again!', {
                 position: "top-center",
                 autoClose: 5000,
                 pauseOnHover: true,

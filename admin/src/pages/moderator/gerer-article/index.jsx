@@ -69,14 +69,16 @@ const GererArticle = () => {
             try {
                 const response = await API.get("/elasticsearch/get_articles_mod/");
                 const data = response.data;
-                setArticles(data);
-                toast.success('Articles loaded!', {
-                    position: "top-center",
-                    autoClose: 5000,
-                    pauseOnHover: true,
-                    draggable: true,
-                    theme: "light",
-                })
+                setArticles(data ?? []);
+                if (!!articles?.length) {
+                    toast.success('Articles loaded!', {
+                        position: "top-center",
+                        autoClose: 5000,
+                        pauseOnHover: true,
+                        draggable: true,
+                        theme: "light",
+                    })
+                }
             } catch (error) {
                 toast.error('Something went wrong, try again!', {
                     position: "top-center",
@@ -97,17 +99,23 @@ const GererArticle = () => {
         <LayoutMod isLoading={isLoading}>
             <div className='flex items-center justify-center mt-2 gap-4'>
                 <div className='w-full gap-4 grid grid-cols-1'>
-                    {articles.map(({ id, title, approved }, index) => (
-                        <ArticleItem
-                            articles={articles}
-                            setArticles={setArticles}
-                            id={id}
-                            title={title}
-                            approved={approved}
-                            index={index}
-                            key={index}
-                        />
-                    ))}
+                    {
+                        !articles.length
+                        ?
+                        <h3 className='w-full text-center text-4xl font-bold pt-20'>No articles for the moment</h3>
+                        :
+                        articles.map(({ id, title, approved }, index) => (
+                            <ArticleItem
+                                articles={articles}
+                                setArticles={setArticles}
+                                id={id}
+                                title={title}
+                                approved={approved}
+                                index={index}
+                                key={index}
+                            />
+                        ))
+                    }
                 </div>
             </div>
         </LayoutMod>

@@ -95,24 +95,24 @@ const GererModerator = () => {
     return (
         <LayoutAdmin isLoading={isLoading}>
             <div className='flex items-center justify-center mt-2 gap-4'>
-                {/* <div className='cursor-pointer h-10 w-10'>
-                    <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
-                </div> */}
                 <div className='w-full gap-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3'>
-                    {moderators.map(({ id, user }, index) => (
-                        <ModItem
-                            moderators={moderators}
-                            setModerators={setModerators}
-                            id={id}
-                            name={user.username}
-                            index={index}
-                            key={index}
-                        />
-                    ))}
+                    {
+                        !moderators.length
+                        ?
+                        <h3 className='w-full text-center text-4xl font-bold pt-20'>No Mods for the moment</h3>
+                        :
+                        moderators.map(({ id, user }, index) => (
+                            <ModItem
+                                moderators={moderators}
+                                setModerators={setModerators}
+                                id={id}
+                                name={user.username}
+                                index={index}
+                                key={index}
+                            />
+                        ))
+                    }
                 </div>
-                {/* <div className='cursor-pointer h-10 w-10 rotate-180'>
-                    <img src="/panel/images/pagination/Arrow.svg" alt="Arrow" />
-                </div> */}
             </div>
         </LayoutAdmin>
     )

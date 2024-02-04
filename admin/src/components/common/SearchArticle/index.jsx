@@ -41,6 +41,11 @@ const SearchArticle = () => {
         try {
             setIsLoading(true);
             const res = await API.get(`elasticsearch/search/${searchValue}/`);
+            
+            if (res?.response?.data?.error?.includes('index_not_found_exception')) {
+                throw new Error('No articles added, contact admins to upload new ones!')
+            }
+            
             if (!!res.data.length) {
                 toast.success('Result is ready!', {
                     position: "top-center",
@@ -60,7 +65,7 @@ const SearchArticle = () => {
                 })
             }
         } catch (error) {
-            toast.error(error?.response?.data?.detail ?? 'Error while searching!', {
+            toast.error(error?.response?.data?.detail ?? error?.message ?? 'Error while searching!', {
                 position: "top-center",
                 autoClose: 5000,
                 pauseOnHover: true,

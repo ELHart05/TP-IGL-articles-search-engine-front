@@ -9,6 +9,6 @@ import './index.css'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <BrowserRouter>
     <App/>
-    <ToastContainer />
+    <ToastContainer className={"mx-3"} />
   </BrowserRouter>,
 )
