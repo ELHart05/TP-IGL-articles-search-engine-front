@@ -128,7 +128,7 @@ const Navbar = ({ accessToken, user }) => {
                             <>
                                 {
                                     (
-                                        (!user?.is_superuser || !user?.is_staff)
+                                        (!user?.is_superuser && !user?.is_staff)
                                         ?
                                         loggedInNavItems
                                         :

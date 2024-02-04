@@ -28,6 +28,9 @@ const Home = () => {
 
     useEffect(() => {
         const getAllArticles = async () => {
+        if (!user) {
+            return;
+        }
         try {
             const res = await API.get(`elasticsearch/get_data/?user_id=${user?.id}`);
             setSearchArticles(res.data);

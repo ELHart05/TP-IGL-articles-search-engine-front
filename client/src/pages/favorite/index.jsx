@@ -34,6 +34,12 @@ const Favorite = () => {
         getFavoriteArticles();
     }, [])
 
+    const filterFavoriteArticles = (id) => {
+        setArticles((prev) => (
+            prev.id !== id
+        ))
+    }
+
     return (
         <Layout isLoading={isLoading}>
             <div className='w-full flex flex-col gap-6 p-9'>
@@ -43,7 +49,13 @@ const Favorite = () => {
                     ?
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:grid-cols-3 gap-y-8 gap-x-16">
                         {articles.map((article, index) => (
-                            <Article key={index} {...article} />
+                            <Article
+                                isFavorite={true}
+                                key={index}
+                                index={index}
+                                filterFavoriteArticles={filterFavoriteArticles}
+                                {...article}
+                            />
                         ))}
                     </div>
                     :

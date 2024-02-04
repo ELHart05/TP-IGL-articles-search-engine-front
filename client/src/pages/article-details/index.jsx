@@ -184,7 +184,7 @@ const ArticleDetails = () => {
               PDF version
             </Link>
             {
-              (!user?.is_superuser || !user?.is_staff)
+              (!user?.is_superuser && !user?.is_staff)
               &&
               <div className='cursor-pointer transition-all flex hover:translate-y-1' onClick={addToFavorite}>
                 {

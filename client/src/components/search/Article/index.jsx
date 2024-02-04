@@ -7,7 +7,7 @@ import API from '../../../utils/api-client'
 import { toast } from 'react-toastify';
 import Spinner from 'react-spinner-material'
 
-const Article = ({ resume, title, id, index, isFavorite }) => {
+const Article = ({ resume, title, id, index, isFavorite, filterFavoriteArticles }) => {
 
     const { user } = isValidUser();
     const [isLoading, setIsLoading] = useState(false);
@@ -21,7 +21,8 @@ const Article = ({ resume, title, id, index, isFavorite }) => {
 
             setIsFavorite((prev) => !prev);
 
-            if (res.status === 200) {
+            if ([200, 201].includes(res.status)) {
+                filterFavoriteArticles && filterFavoriteArticles(id);
                 if (res.data.type == 'remove') {
                     toast.success('Removed from favorite successfully!', {
                         position: "top-center",
@@ -40,7 +41,7 @@ const Article = ({ resume, title, id, index, isFavorite }) => {
                     })
                 }
             } else {
-                toast.error('Error while toggling the article in favorite!', {
+                toast.error('Error while toggeling the article favorite!', {
                     position: "top-center",
                     autoClose: 5000,
                     pauseOnHover: true,
@@ -48,7 +49,6 @@ const Article = ({ resume, title, id, index, isFavorite }) => {
                     theme: "light",
                 })
             }
-    
         } catch (error) {
             toast.error('Something went wrong, try again!', {
                 position: "top-center",
@@ -76,7 +76,7 @@ const Article = ({ resume, title, id, index, isFavorite }) => {
             <div className='flex items-center justify-between px-4'>
                 <div className='text-md sm:text-lg text-green font-bold w-fit'>{title}</div>
                 {
-                    !user?.is_superuser || !user?.is_staff
+                    !user?.is_superuser && !user?.is_staff
                     &&
                     <div className='cursor-pointer' onClick={toggleFavorite}>
                         {
