@@ -24,7 +24,9 @@ const ModView = ({ mod }) => {
             setIsLoading(true);
 
             await API.put(`/paperhub/moderator/update-moderator/${mod?.id}/`, {
-                ...data,
+                user: {
+                    ...data
+                },
             })
 
             toast.success('Mod account updated successfully', {
@@ -34,6 +36,8 @@ const ModView = ({ mod }) => {
                 draggable: true,
                 theme: "light",
             })
+
+            navigate('/admin/gerer-moderator')
         } catch (error) {
             console.log(error)
             toast.error('Error!', {

@@ -70,7 +70,7 @@ const Search = () => {
         try {
             setIsLoading(true)
 
-            const res = await API.get(`elasticsearch/search/${search_query}/`)
+            const res = await API.get(`elasticsearch/search/${search_query}/?user_id=${user?.id}`)
             
             setDataLength(res?.data?.length ?? 0);
             setArticles(res?.data ?? []);
@@ -103,32 +103,39 @@ const Search = () => {
 
     const filterArticles = () => {
         let filteredArticles = articles.slice();
+        let A = [];
+        let I = [];
+        let K = [];
+    
+        if (!filters.Authors && !filters.Institutions && !filters.Keywords) {
+            setSearchArticles([...filteredArticles]);
+            return;
+        }
+    
+        const filterIgnoreCase = (item, filter) =>
+            item.toLowerCase().includes(filter.toLowerCase());
     
         if (filters.Authors) {
-            filteredArticles = filteredArticles.filter((article) =>
-                article?.authors.some((author) => author.includes(filters.Authors))
+            A = filteredArticles.filter((article) =>
+                article?.authors.some((author) => filterIgnoreCase(author, filters.Authors))
             );
-        } else {
-            filteredArticles = articles;
         }
     
         if (filters.Institutions) {
-            filteredArticles = filteredArticles.filter((article) =>
-            article?.institutions.some((institution) => institution.includes(filters.Institutions))
+            I = filteredArticles.filter((article) =>
+                article?.institutions.some((institution) =>
+                    filterIgnoreCase(institution, filters.Institutions)
+                )
             );
-        } else {
-            filteredArticles = articles;
         }
     
         if (filters.Keywords) {
-            filteredArticles = filteredArticles.filter((article) =>
-            article?.keywords.some((keyword) => keyword.includes(filters.Keywords))
+            K = filteredArticles.filter((article) =>
+                article?.keywords.some((keyword) => filterIgnoreCase(keyword, filters.Keywords))
             );
-        } else {
-            filteredArticles = articles;
         }
-
-        setSearchArticles([...filteredArticles]);
+    
+        setSearchArticles([...new Set([...A, ...I, ...K])]);
     };
 
     return (
@@ -151,15 +158,15 @@ const Search = () => {
                         <Spinner />
                     </div>
                     :
-                    !!searchArticles.length
+                    searchArticles.length === 0 || searchArticles.every((article) => !article?.approved)
                     ?
+                    <h5 className='text-center font-bold text-4xl sm:text-7xl w-full py-24'>No articles founded</h5>
+                    :
                     <div className="w-full grid grid-cols-1 md:grid-cols-2 justify-center items-center lg:grid-cols-3 gap-x-2 gap-y-8">
                         {searchArticles.map((article, index) => (
-                            <Article key={index} {...article} index={index} />
+                            (article?.approved) && <Article key={index} {...article} index={index} />
                         ))}
                     </div>
-                    :
-                    <h5 className='text-center font-bold text-4xl sm:text-7xl w-full py-24'>No articles founded</h5>
                 }
                 </div>
             </div> 

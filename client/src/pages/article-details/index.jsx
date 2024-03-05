@@ -55,12 +55,14 @@ const ArticleDetails = () => {
   const { user } = isValidUser();
   const navigate = useNavigate();
   const [article, setArticle] = useState(null)
+  const [favorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
     const getArticleDetails = async () => {
       try {
-        const res = await API.get(`elasticsearch/get_article_id/${id}/`);
+        const res = await API.get(`elasticsearch/get_article_id/${id}/?user_id=${user?.id}`);
         setArticle(res.data);
+        setIsFavorite(res?.data?.isFavorite);
 
         toast.success('Article loaded successfully!', {
           position: "top-center",
@@ -90,15 +92,37 @@ const ArticleDetails = () => {
     try {
 
         setIsFavoriteLoading(true)
-        await API.post(`paperhub/user/favorite/${user.id}/${id}/`)
-    
-        toast.success('Added to favorite!', {
-            position: "top-center",
-            autoClose: 5000,
-            pauseOnHover: true,
-            draggable: true,
-            theme: "light",
-        })
+        const res = await API.post(`paperhub/user/favorite/${user.id}/${id}/`)
+
+        setIsFavorite((prev) => !prev)
+
+        if ([200, 201].includes(res.status)) {
+          if (res.data.type == 'remove') {
+              toast.success('Removed from favorite successfully!', {
+                  position: "top-center",
+                  autoClose: 5000,
+                  pauseOnHover: true,
+                  draggable: true,
+                  theme: "light",
+              })
+          } else {
+              toast.success('Added to favorite successfully!', {
+                  position: "top-center",
+                  autoClose: 5000,
+                  pauseOnHover: true,
+                  draggable: true,
+                  theme: "light",
+              })
+          }
+      } else {
+          toast.error('Error while toggeling the article favorite!', {
+              position: "top-center",
+              autoClose: 5000,
+              pauseOnHover: true,
+              draggable: true,
+              theme: "light",
+          })
+      }
 
     } catch (error) {
         toast.error('Something went wrong, try again!', {
@@ -192,7 +216,7 @@ const ArticleDetails = () => {
                   ?
                   <Spinner style={{height: '24px', width: '24px'}} />
                   :
-                  <img className='h-10 w-10' src="/images/Home/ArticlesList/favorite-off.svg" alt="Heart" />
+                  <img className='h-10 w-10' src={favorite ? "/images/Home/ArticlesList/favorite-on.svg" : "/images/Home/ArticlesList/favorite-off.svg"} alt="Heart" />
                 }
               </div>
             }
